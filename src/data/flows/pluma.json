@@ -1,0 +1,143 @@
+{
+  "id": "pluma",
+  "entity": "pluma",
+  "title": "Avec Pluma — La Tristesse",
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "message",
+      "speaker": "pluma",
+      "text": "Je suis Pluma. La tristesse, je la connais bien. Elle a quelque chose à dire, et je vais t'aider à l'écouter.",
+      "next": "q1"
+    },
+    "q1": {
+      "id": "q1",
+      "type": "question",
+      "speaker": "pluma",
+      "text": "Ta tristesse, elle est comment en ce moment ?",
+      "options": [
+        { "id": "q1_small", "label": "Toute petite mais là", "next": "q2_small" },
+        { "id": "q1_heavy", "label": "Assez lourde", "next": "q2_heavy" },
+        { "id": "q1_cry", "label": "J'ai envie de pleurer", "next": "q2_cry" }
+      ]
+    },
+    "q2_small": {
+      "id": "q2_small",
+      "type": "message+question",
+      "speaker": "pluma",
+      "text": "Même une petite tristesse mérite d'être entendue. Elle est là pour une raison.",
+      "question": "Est-ce que quelque chose te manque ?",
+      "options": [
+        { "id": "q2s_person", "label": "Une personne", "next": "q3_miss_person" },
+        { "id": "q2s_thing", "label": "Un moment, un endroit", "next": "q3_miss_thing" },
+        { "id": "q2s_unsure", "label": "Je sais pas vraiment", "next": "q3_unsure" }
+      ]
+    },
+    "q2_heavy": {
+      "id": "q2_heavy",
+      "type": "message+question",
+      "speaker": "pluma",
+      "text": "Une tristesse lourde, ça peut peser beaucoup. On ne te demande pas de la faire partir tout de suite.",
+      "question": "Tu veux…",
+      "options": [
+        { "id": "q2h_talk", "label": "Parler de ce qui s'est passé", "next": "q3_heavy_talk" },
+        { "id": "q2h_breathe", "label": "D'abord respirer", "next": "minigame_rain" },
+        { "id": "q2h_stay", "label": "Juste que quelqu'un soit là", "next": "reframe_presence" }
+      ]
+    },
+    "q2_cry": {
+      "id": "q2_cry",
+      "type": "message",
+      "speaker": "pluma",
+      "text": "Avoir envie de pleurer, c'est le corps qui veut laisser sortir quelque chose. Les larmes nettoient. C'est une très bonne idée.",
+      "next": "minigame_rain"
+    },
+    "q3_miss_person": {
+      "id": "q3_miss_person",
+      "type": "message",
+      "speaker": "pluma",
+      "text": "Manquer de quelqu'un, c'est une des tristesses les plus importantes. Ça veut dire que cette personne compte vraiment pour toi. C'est une forme d'amour.",
+      "next": "minigame_rain"
+    },
+    "q3_miss_thing": {
+      "id": "q3_miss_thing",
+      "type": "message",
+      "speaker": "pluma",
+      "text": "Manquer d'un moment ou d'un endroit, c'est très réel comme tristesse. On peut aimer des lieux comme on aime des personnes.",
+      "next": "minigame_rain"
+    },
+    "q3_unsure": {
+      "id": "q3_unsure",
+      "type": "message",
+      "speaker": "pluma",
+      "text": "Parfois la tristesse est là sans qu'on sache vraiment pourquoi. C'est normal aussi. Elle n'a pas toujours besoin d'une raison pour mériter d'être là.",
+      "next": "minigame_rain"
+    },
+    "q3_heavy_talk": {
+      "id": "q3_heavy_talk",
+      "type": "message+question",
+      "speaker": "pluma",
+      "text": "Quelque chose de difficile s'est passé ?",
+      "options": [
+        { "id": "q3ht_argument", "label": "Une dispute", "next": "reframe_argument" },
+        { "id": "q3ht_loss", "label": "Quelque chose ou quelqu'un est parti", "next": "reframe_loss" },
+        { "id": "q3ht_disappointment", "label": "Une déception", "next": "reframe_disappointment" }
+      ]
+    },
+    "reframe_argument": {
+      "id": "reframe_argument",
+      "type": "reframe",
+      "speaker": "pluma",
+      "text": "Après une dispute, la tristesse arrive souvent. C'est parce que ça compte. Les disputes ne veulent pas dire que l'amour est parti.",
+      "next": "minigame_rain"
+    },
+    "reframe_loss": {
+      "id": "reframe_loss",
+      "type": "reframe",
+      "speaker": "pluma",
+      "text": "Quand quelque chose qu'on aimait part, on a le droit d'être triste. Cette tristesse est normale. Elle ne durera pas toujours.",
+      "next": "minigame_rain"
+    },
+    "reframe_disappointment": {
+      "id": "reframe_disappointment",
+      "type": "reframe",
+      "speaker": "pluma",
+      "text": "Les déceptions font mal parce qu'on espérait quelque chose. Espérer, c'est courageux. Et ça peut revenir, différemment.",
+      "next": "minigame_rain"
+    },
+    "reframe_presence": {
+      "id": "reframe_presence",
+      "type": "reframe",
+      "speaker": "pluma",
+      "text": "Vouloir que quelqu'un soit là, c'est humain. Je suis là, moi. Et il y a des gens dans ta vraie vie qui peuvent être là aussi — tu peux le leur demander.",
+      "next": "minigame_rain"
+    },
+    "minigame_rain": {
+      "id": "minigame_rain",
+      "type": "minigame",
+      "game": "RainRelease",
+      "speaker": "pluma",
+      "intro": "Essuie doucement les gouttes de pluie. Chaque goutte, c'est un peu de peine qui part.",
+      "next": "formula_select"
+    },
+    "formula_select": {
+      "id": "formula_select",
+      "type": "formula",
+      "entity": "pluma",
+      "next": "moral"
+    },
+    "moral": {
+      "id": "moral",
+      "type": "moral",
+      "entity": "pluma",
+      "next": "end"
+    },
+    "end": {
+      "id": "end",
+      "type": "end",
+      "speaker": "milo",
+      "text": "Tu as laissé sortir quelque chose aujourd'hui. C'est très courageux. Maintenant tu peux aller dans la vraie vie.",
+      "next": null
+    }
+  }
+}

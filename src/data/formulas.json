@@ -1,0 +1,102 @@
+{
+  "brumo": [
+    {
+      "id": "brumo_body",
+      "condition": "peur dans le corps",
+      "formula": "Mon corps peut ralentir. La peur passe.",
+      "gesture": "Pose une main sur ton ventre. Respire lentement trois fois."
+    },
+    {
+      "id": "brumo_image",
+      "condition": "peur d'une image",
+      "formula": "Je peux rendre cette image plus petite dans ma tête.",
+      "gesture": "Imagine l'image. Maintenant rétrécis-la comme un écran qu'on éteint."
+    },
+    {
+      "id": "brumo_hide",
+      "condition": "envie de se cacher",
+      "formula": "Me cacher c'est normal. Et après, je peux revenir.",
+      "gesture": "Trouve un coin douillet. Reste-y un moment. Puis reviens quand tu veux."
+    }
+  ],
+  "ignis": [
+    {
+      "id": "ignis_shout",
+      "condition": "envie de crier",
+      "formula": "Ma colère peut parler sans brûler.",
+      "gesture": "Crie fort dans un coussin. Une seule fois. C'est autorisé."
+    },
+    {
+      "id": "ignis_hurt",
+      "condition": "quelqu'un t'a blessé",
+      "formula": "Je peux dire que ça m'a fait mal, sans blesser en retour.",
+      "gesture": "Dis à voix haute : 'Ça m'a blessé quand...'. Tu n'as pas besoin d'un public."
+    },
+    {
+      "id": "ignis_move",
+      "condition": "corps explosif",
+      "formula": "Mon corps a besoin de bouger. Et c'est une bonne idée.",
+      "gesture": "Saute sur place dix fois. Secoue tes mains fort. Ça aide vraiment."
+    }
+  ],
+  "pluma": [
+    {
+      "id": "pluma_miss",
+      "condition": "quelque chose manque",
+      "formula": "Mes larmes racontent quelque chose d'important.",
+      "gesture": "Pleure si tu veux. Les larmes ne durent pas toujours."
+    },
+    {
+      "id": "pluma_heavy",
+      "condition": "tristesse très lourde",
+      "formula": "Je peux poser ma peine ici. Je n'ai pas besoin de la porter seul.",
+      "gesture": "Dis à voix haute ce qui est lourd. Une seule phrase. Tu peux le murmurer."
+    },
+    {
+      "id": "pluma_hug",
+      "condition": "besoin d'un câlin",
+      "formula": "Un câlin à moi-même compte aussi.",
+      "gesture": "Serre tes bras autour de toi. Comme si tu te prenais dans les bras."
+    }
+  ],
+  "nox": [
+    {
+      "id": "nox_dark",
+      "condition": "rêve sombre et poursuite",
+      "formula": "Dans mon rêve, j'ai le droit de changer la fin.",
+      "gesture": "Imagine ton rêve. Maintenant, donne au méchant une tête de pingouin ridicule."
+    },
+    {
+      "id": "nox_cold",
+      "condition": "peur et froid dans le rêve",
+      "formula": "La nuit peut être impressionnante, mais je suis en sécurité maintenant.",
+      "gesture": "Regarde autour de toi. Tu es réveillé. Pose les deux pieds par terre."
+    },
+    {
+      "id": "nox_light",
+      "condition": "rêve avec lumière",
+      "formula": "La lumière dans mes rêves est à moi. Je peux la garder.",
+      "gesture": "Ferme les yeux une seconde. Retrouve cette lumière. Elle est encore là."
+    }
+  ],
+  "soli": [
+    {
+      "id": "soli_nobody",
+      "condition": "personne n'est là",
+      "formula": "Même quand je me sens seul, un lien peut revenir.",
+      "gesture": "Pense à une personne qui t'aime, même loin. Elle existe encore."
+    },
+    {
+      "id": "soli_understood",
+      "condition": "personne ne comprend",
+      "formula": "Ne pas être compris n'est pas la même chose qu'être seul.",
+      "gesture": "Écris ou dessine ce que tu ressens. Pour toi. Juste pour toi."
+    },
+    {
+      "id": "soli_connect",
+      "condition": "envie d'être proche de quelqu'un",
+      "formula": "Je peux faire un petit signe à quelqu'un aujourd'hui.",
+      "gesture": "Pense à une personne. Fais-lui un signe — un sourire, un mot, un dessin."
+    }
+  ]
+}

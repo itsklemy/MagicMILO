@@ -1,0 +1,71 @@
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Avatar */
+.guide-avatar {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.guide-avatar-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(196, 184, 232, 0.4) 0%,
+    transparent 70%
+  );
+  animation: breathe 3s ease-in-out infinite, pulse-glow 3s ease-in-out infinite;
+}
+
+.guide-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: float 5s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 8px 24px rgba(155, 142, 196, 0.4));
+}
+
+/* Bulles */
+.guide-speech {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.guide-bubble {
+  background: rgba(45, 38, 96, 0.7);
+  border: 1px solid rgba(196, 184, 232, 0.25);
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--color-lavender-pale);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* Animation d'entrée */
+.guide-card--animated .guide-bubble {
+  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Version statique (pas d'animation) */
+.guide-card:not(.guide-card--animated) .guide-bubble {
+  opacity: 1;
+  transform: none;
+}

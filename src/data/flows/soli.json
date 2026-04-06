@@ -1,0 +1,149 @@
+{
+  "id": "soli",
+  "entity": "soli",
+  "title": "Avec Soli — La Solitude",
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "message",
+      "speaker": "soli",
+      "text": "Moi c'est Soli. Quand on se sent seul, je suis là. Tu n'es pas vraiment seul en ce moment.",
+      "next": "q1"
+    },
+    "q1": {
+      "id": "q1",
+      "type": "question",
+      "speaker": "soli",
+      "text": "Tu te sens seul parce que…",
+      "options": [
+        { "id": "q1_nobody", "label": "Personne n'est là physiquement", "next": "q2_nobody" },
+        { "id": "q1_understood", "label": "Personne ne me comprend", "next": "q2_understood" },
+        { "id": "q1_excluded", "label": "J'ai été mis de côté", "next": "q2_excluded" }
+      ]
+    },
+    "q2_nobody": {
+      "id": "q2_nobody",
+      "type": "message+question",
+      "speaker": "soli",
+      "text": "Être seul physiquement, ça peut faire peur ou peser lourd. Et en même temps, tu peux être relié à des gens même quand ils ne sont pas là.",
+      "question": "Ce que tu aimerais le plus là maintenant…",
+      "options": [
+        { "id": "q2n_think", "label": "Que quelqu'un pense à moi", "next": "reframe_think" },
+        { "id": "q2n_talk", "label": "Que quelqu'un me parle", "next": "reframe_talk" },
+        { "id": "q2n_hug", "label": "Être pris dans les bras", "next": "reframe_hug" }
+      ]
+    },
+    "q2_understood": {
+      "id": "q2_understood",
+      "type": "message+question",
+      "speaker": "soli",
+      "text": "Ne pas se sentir compris, c'est une solitude encore plus difficile que d'être seul physiquement. Ça touche quelque chose de très profond.",
+      "question": "C'est avec qui que tu ne te sens pas compris ?",
+      "options": [
+        { "id": "q2u_family", "label": "Ma famille", "next": "reframe_family" },
+        { "id": "q2u_friends", "label": "Mes amis", "next": "reframe_friends" },
+        { "id": "q2u_all", "label": "Tout le monde", "next": "reframe_all" }
+      ]
+    },
+    "q2_excluded": {
+      "id": "q2_excluded",
+      "type": "message",
+      "speaker": "soli",
+      "text": "Être mis de côté, c'est vraiment douloureux. C'est une des choses les plus difficiles qu'on puisse vivre à l'école ou avec des amis. Tu n'as pas tort de souffrir de ça.",
+      "next": "q3_excluded"
+    },
+    "q3_excluded": {
+      "id": "q3_excluded",
+      "type": "question",
+      "speaker": "soli",
+      "text": "Est-ce que c'est la première fois ou ça arrive souvent ?",
+      "options": [
+        { "id": "q3e_once", "label": "C'est arrivé aujourd'hui", "next": "reframe_today" },
+        { "id": "q3e_often", "label": "Ça arrive souvent", "next": "reframe_often" }
+      ]
+    },
+    "reframe_think": {
+      "id": "reframe_think",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Il y a sûrement quelqu'un en ce moment qui pense à toi sans le dire. Les liens ne disparaissent pas quand on se sépare.",
+      "next": "minigame_lights"
+    },
+    "reframe_talk": {
+      "id": "reframe_talk",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Vouloir qu'on te parle, c'est normal et humain. Tu peux aussi faire le premier pas — même juste un petit mot. Ça change tout.",
+      "next": "minigame_lights"
+    },
+    "reframe_hug": {
+      "id": "reframe_hug",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Un câlin d'une vraie personne, c'est irremplaçable. Tu peux le demander. Et si personne n'est là, serre un coussin ou une peluche fort. Ça aide vraiment.",
+      "next": "minigame_lights"
+    },
+    "reframe_family": {
+      "id": "reframe_family",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Les familles comprennent pas toujours de la bonne façon. Parfois elles essaient mais ratent. Ça ne veut pas dire qu'elles ne t'aiment pas.",
+      "next": "minigame_lights"
+    },
+    "reframe_friends": {
+      "id": "reframe_friends",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Les amis de ton âge apprennent aussi à comprendre les autres. Parfois ils ne savent pas encore comment faire. Ça peut changer.",
+      "next": "minigame_lights"
+    },
+    "reframe_all": {
+      "id": "reframe_all",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Quand on a l'impression que personne ne comprend, c'est souvent le signe qu'on est encore en train de trouver sa place. Ça arrive à beaucoup d'enfants et ça évolue.",
+      "next": "minigame_lights"
+    },
+    "reframe_today": {
+      "id": "reframe_today",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Une chose difficile qui arrive un seul jour, ça peut faire très mal. Et en même temps, une seule journée n'est pas toute ta vie.",
+      "next": "minigame_lights"
+    },
+    "reframe_often": {
+      "id": "reframe_often",
+      "type": "reframe",
+      "speaker": "soli",
+      "text": "Quand ça arrive souvent, c'est important d'en parler à un adulte de confiance. Ce n'est pas ta faute, et tu as le droit d'être aidé.",
+      "next": "minigame_lights"
+    },
+    "minigame_lights": {
+      "id": "minigame_lights",
+      "type": "minigame",
+      "game": "LightLinks",
+      "speaker": "soli",
+      "intro": "Relie ces petites lucioles pour former un cercle de lumière autour de toi. Chaque lien que tu fais est réel.",
+      "next": "formula_select"
+    },
+    "formula_select": {
+      "id": "formula_select",
+      "type": "formula",
+      "entity": "soli",
+      "next": "moral"
+    },
+    "moral": {
+      "id": "moral",
+      "type": "moral",
+      "entity": "soli",
+      "next": "end"
+    },
+    "end": {
+      "id": "end",
+      "type": "end",
+      "speaker": "milo",
+      "text": "Tu as trouvé un lien aujourd'hui. Maintenant essaie de le garder dans la vraie vie.",
+      "next": null
+    }
+  }
+}

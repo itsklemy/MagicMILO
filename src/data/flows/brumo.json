@@ -1,0 +1,177 @@
+{
+  "id": "brumo",
+  "entity": "brumo",
+  "title": "Avec Brumo — La Peur",
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Moi c'est Brumo. Je suis là quand quelque chose fait peur. On va regarder ça ensemble, tout doucement.",
+      "next": "q1"
+    },
+    "q1": {
+      "id": "q1",
+      "type": "question",
+      "speaker": "brumo",
+      "text": "La peur, elle est où dans ton corps ?",
+      "options": [
+        { "id": "q1_belly", "label": "Dans mon ventre", "next": "q2_belly" },
+        { "id": "q1_heart", "label": "Dans mon cœur", "next": "q2_heart" },
+        { "id": "q1_throat", "label": "Dans ma gorge", "next": "q2_throat" }
+      ]
+    },
+    "q2_belly": {
+      "id": "q2_belly",
+      "type": "message+question",
+      "speaker": "brumo",
+      "text": "Le ventre, c'est souvent là que la peur commence. Ton corps est très attentif.",
+      "question": "C'est quoi ce qui fait peur ?",
+      "options": [
+        { "id": "q2b_noise", "label": "Un bruit", "next": "q3_noise" },
+        { "id": "q2b_image", "label": "Une image dans ma tête", "next": "q3_image" },
+        { "id": "q2b_place", "label": "Un endroit", "next": "q3_place" },
+        { "id": "q2b_imagine", "label": "Quelque chose que j'imagine", "next": "q3_imagine" }
+      ]
+    },
+    "q2_heart": {
+      "id": "q2_heart",
+      "type": "message+question",
+      "speaker": "brumo",
+      "text": "Quand le cœur bat fort, c'est que ton corps s'est mis en mode protection. C'est lui qui essaie de t'aider.",
+      "question": "Ton corps, il veut plutôt…",
+      "options": [
+        { "id": "q2h_move", "label": "Bouger, fuir", "next": "q3_move" },
+        { "id": "q2h_hide", "label": "Se cacher", "next": "q3_hide" },
+        { "id": "q2h_freeze", "label": "Ne plus bouger du tout", "next": "q3_freeze" }
+      ]
+    },
+    "q2_throat": {
+      "id": "q2_throat",
+      "type": "message+question",
+      "speaker": "brumo",
+      "text": "La gorge serrée, ça peut vouloir dire que quelque chose veut sortir — un cri, des larmes, ou des mots.",
+      "question": "Tu veux plutôt…",
+      "options": [
+        { "id": "q2t_calm", "label": "Calmer mon corps d'abord", "next": "minigame_breath" },
+        { "id": "q2t_talk", "label": "Regarder la peur ensemble", "next": "q3_image" }
+      ]
+    },
+    "q3_noise": {
+      "id": "q3_noise",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Les bruits peuvent vraiment surprendre. Ton oreille a entendu quelque chose et ton corps a réagi tout seul — c'est automatique, pas dangereux.",
+      "next": "reframe_noise"
+    },
+    "q3_image": {
+      "id": "q3_image",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Les images dans la tête peuvent être très vives. Mais elles restent des images — elles ne peuvent pas sortir de ta tête.",
+      "next": "minigame_shrink"
+    },
+    "q3_place": {
+      "id": "q3_place",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Certains endroits font peur, et c'est normal. Ton corps a appris à faire attention là-bas. On peut lui apprendre que tu es en sécurité.",
+      "next": "minigame_breath"
+    },
+    "q3_imagine": {
+      "id": "q3_imagine",
+      "type": "message+question",
+      "speaker": "brumo",
+      "text": "Les choses qu'on imagine peuvent faire autant peur que les vraies. Et en même temps, elles ne sont que dans ta tête.",
+      "question": "Ça t'arrive souvent d'imaginer des choses qui font peur ?",
+      "options": [
+        { "id": "q3i_often", "label": "Oui, souvent", "next": "reframe_imagine_often" },
+        { "id": "q3i_now", "label": "Non, c'est juste maintenant", "next": "reframe_imagine_now" }
+      ]
+    },
+    "q3_move": {
+      "id": "q3_move",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Quand le corps veut bouger, c'est qu'il cherche à se mettre en sécurité. C'est très intelligent de sa part.",
+      "next": "minigame_breath"
+    },
+    "q3_hide": {
+      "id": "q3_hide",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Vouloir se cacher, c'est très naturel. Ça donne une pause au corps. Et après la pause, on peut regarder ce qui faisait peur.",
+      "next": "reframe_hide"
+    },
+    "q3_freeze": {
+      "id": "q3_freeze",
+      "type": "message",
+      "speaker": "brumo",
+      "text": "Ne plus bouger, c'est une autre façon du corps de se protéger. Comme un animal qui fait le mort. Ton corps essaie de t'aider.",
+      "next": "minigame_breath"
+    },
+    "reframe_noise": {
+      "id": "reframe_noise",
+      "type": "reframe",
+      "speaker": "brumo",
+      "text": "Un bruit inattendu, ça réveille le corps très vite. C'est normal — ton cerveau a voulu te protéger. Maintenant il sait que c'est passé.",
+      "next": "minigame_breath"
+    },
+    "reframe_hide": {
+      "id": "reframe_hide",
+      "type": "reframe",
+      "speaker": "brumo",
+      "text": "Me cacher un moment, c'est autorisé. Ça n'est pas une faiblesse. C'est une pause. Et après, on revient quand on est prêt.",
+      "next": "minigame_breath"
+    },
+    "reframe_imagine_often": {
+      "id": "reframe_imagine_often",
+      "type": "reframe",
+      "speaker": "brumo",
+      "text": "Quand on imagine beaucoup de choses qui font peur, c'est souvent parce qu'on est très sensible. Et être sensible, c'est une qualité — même si c'est parfois fatigant.",
+      "next": "minigame_shrink"
+    },
+    "reframe_imagine_now": {
+      "id": "reframe_imagine_now",
+      "type": "reframe",
+      "speaker": "brumo",
+      "text": "Parfois une image arrive comme ça, sans prévenir. Ça ne veut rien dire. Et on peut l'aider à devenir plus petite.",
+      "next": "minigame_shrink"
+    },
+    "minigame_breath": {
+      "id": "minigame_breath",
+      "type": "minigame",
+      "game": "BreathCloud",
+      "speaker": "brumo",
+      "intro": "On va ralentir ton corps ensemble. Souffle doucement sur ce nuage.",
+      "next": "formula_select"
+    },
+    "minigame_shrink": {
+      "id": "minigame_shrink",
+      "type": "minigame",
+      "game": "MonsterShrink",
+      "speaker": "brumo",
+      "intro": "On va réduire cette image dans ta tête. Fais-la devenir toute petite.",
+      "next": "formula_select"
+    },
+    "formula_select": {
+      "id": "formula_select",
+      "type": "formula",
+      "entity": "brumo",
+      "next": "moral"
+    },
+    "moral": {
+      "id": "moral",
+      "type": "moral",
+      "entity": "brumo",
+      "next": "end"
+    },
+    "end": {
+      "id": "end",
+      "type": "end",
+      "speaker": "milo",
+      "text": "Tu as fait quelque chose de courageux aujourd'hui. Maintenant tu peux essayer dans la vraie vie.",
+      "next": null
+    }
+  }
+}

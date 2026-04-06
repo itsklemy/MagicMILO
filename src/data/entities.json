@@ -1,0 +1,87 @@
+{
+  "brumo": {
+    "id": "brumo",
+    "name": "Brumo",
+    "emotion": "peur",
+    "emotion_label": "La Peur",
+    "subtitle": "Quand quelque chose fait peur",
+    "style": "Petit nuage pelucheux protecteur",
+    "colors": {
+      "primary": "#9b8ec4",
+      "secondary": "#c4b8e8",
+      "background": "#e8e4f5",
+      "text": "#3d3560"
+    },
+    "personality": "doux, timide, enveloppant",
+    "tone": "aide à ralentir le corps et comprendre la peur",
+    "intro": "Moi c'est Brumo. Je suis là quand quelque chose fait peur. On va regarder ça ensemble, tout doucement."
+  },
+  "ignis": {
+    "id": "ignis",
+    "name": "Ignis",
+    "emotion": "colere",
+    "emotion_label": "La Colère",
+    "subtitle": "Quand on est en colère",
+    "style": "Petit dragon-braise adorable",
+    "colors": {
+      "primary": "#ff8b6a",
+      "secondary": "#ffb347",
+      "background": "#ffeee8",
+      "text": "#7a3020"
+    },
+    "personality": "énergique mais pas agressif",
+    "tone": "aide à transformer la colère sans exploser",
+    "intro": "Salut, moi c'est Ignis ! Je connais très bien la colère. On va lui parler ensemble."
+  },
+  "pluma": {
+    "id": "pluma",
+    "name": "Pluma",
+    "emotion": "tristesse",
+    "emotion_label": "La Tristesse",
+    "subtitle": "Quand on a de la peine",
+    "style": "Petite goutte nuage / pluie douce",
+    "colors": {
+      "primary": "#7ec8c8",
+      "secondary": "#a8e6cf",
+      "background": "#e8f8f8",
+      "text": "#1a5050"
+    },
+    "personality": "délicate, tendre, enveloppante",
+    "tone": "aide à déposer la peine et comprendre les larmes",
+    "intro": "Je suis Pluma. La tristesse, je la connais bien. Elle a quelque chose à dire, et je vais t'aider à l'écouter."
+  },
+  "nox": {
+    "id": "nox",
+    "name": "Nox",
+    "emotion": "cauchemar",
+    "emotion_label": "Les Cauchemars",
+    "subtitle": "Quand la nuit fait peur",
+    "style": "Gardien étoilé tout doux",
+    "colors": {
+      "primary": "#5c4a8a",
+      "secondary": "#9b8ec4",
+      "background": "#e8e4f5",
+      "text": "#2a1a5a"
+    },
+    "personality": "rassurant, mystérieux mais chaleureux",
+    "tone": "aide à décrire le rêve, reprendre le contrôle et se rendormir",
+    "intro": "Je suis Nox, le gardien de la nuit. Je veille sur les rêves. Dis-moi ce que tu as vu."
+  },
+  "soli": {
+    "id": "soli",
+    "name": "Soli",
+    "emotion": "solitude",
+    "emotion_label": "La Solitude",
+    "subtitle": "Quand on se sent seul",
+    "style": "Luciole-compagne lumineuse",
+    "colors": {
+      "primary": "#ffd166",
+      "secondary": "#ffb347",
+      "background": "#fffae8",
+      "text": "#5a3a00"
+    },
+    "personality": "douce, fidèle, discrète",
+    "tone": "aide à se sentir relié et moins seul",
+    "intro": "Moi c'est Soli. Quand on se sent seul, je suis là. Tu n'es pas vraiment seul en ce moment."
+  }
+}

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Warm glow -->
+  <circle cx="100" cy="110" r="78" fill="url(#ignisGlow)" opacity="0.3"/>
+  <!-- Little wings -->
+  <ellipse cx="58" cy="90" rx="22" ry="14" fill="url(#ignisWing)" transform="rotate(-30, 58, 90)" opacity="0.8"/>
+  <ellipse cx="142" cy="90" rx="22" ry="14" fill="url(#ignisWing)" transform="rotate(30, 142, 90)" opacity="0.8"/>
+  <!-- Body - round dragon -->
+  <ellipse cx="100" cy="118" rx="48" ry="50" fill="url(#ignisBody)"/>
+  <!-- Tummy -->
+  <ellipse cx="100" cy="122" rx="28" ry="30" fill="#ffd4c0" opacity="0.6"/>
+  <!-- Head bumps / horns -->
+  <path d="M82 70 L78 54 L88 66" fill="#ff8b6a"/>
+  <path d="M118 70 L122 54 L112 66" fill="#ff8b6a"/>
+  <!-- Eyes - bright and energetic -->
+  <circle cx="86" cy="98" r="10" fill="#fff5f0"/>
+  <circle cx="114" cy="98" r="10" fill="#fff5f0"/>
+  <circle cx="87" cy="99" r="6" fill="#c0380a"/>
+  <circle cx="115" cy="99" r="6" fill="#c0380a"/>
+  <!-- Eye shine -->
+  <circle cx="90" cy="96.5" r="2.5" fill="white"/>
+  <circle cx="118" cy="96.5" r="2.5" fill="white"/>
+  <!-- Energetic eyebrows -->
+  <path d="M80 86 Q86 82 92 86" stroke="#e05020" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M108 86 Q114 82 120 86" stroke="#e05020" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Big toothy grin -->
+  <path d="M86 114 Q100 128 114 114" stroke="#e05020" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Little tooth -->
+  <rect x="97" y="114" width="6" height="6" rx="2" fill="white"/>
+  <!-- Blush -->
+  <ellipse cx="76" cy="108" rx="7" ry="4.5" fill="#ff8b6a" opacity="0.35"/>
+  <ellipse cx="124" cy="108" rx="7" ry="4.5" fill="#ff8b6a" opacity="0.35"/>
+  <!-- Tail -->
+  <path d="M148 140 Q170 150 165 168 Q155 180 148 168" stroke="#ff8b6a" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- Little flame on tail tip -->
+  <path d="M148 168 Q145 158 152 152 Q158 158 155 168Z" fill="#ffd166"/>
+  <!-- Flame particles -->
+  <circle cx="55" cy="65" r="4" fill="#ffd166" opacity="0.7"/>
+  <circle cx="145" cy="62" r="5" fill="#ff8b6a" opacity="0.6"/>
+  <circle cx="160" cy="80" r="3" fill="#ffd166" opacity="0.5"/>
+  <defs>
+    <radialGradient id="ignisGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffb347"/>
+      <stop offset="100%" stop-color="#ff8b6a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ignisBody" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffcab0"/>
+      <stop offset="100%" stop-color="#ff8b6a"/>
+    </radialGradient>
+    <radialGradient id="ignisWing" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffd4b0"/>
+      <stop offset="100%" stop-color="#ff9060"/>
+    </radialGradient>
+  </defs>
+</svg>

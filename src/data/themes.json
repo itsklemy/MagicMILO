@@ -1,0 +1,32 @@
+{
+  "brumo": {
+    "backgroundGradient": "radial-gradient(ellipse at 50% 0%, #2a2258 0%, #1a1535 50%, #0e0c22 100%)",
+    "particleColor": "#9b8ec4",
+    "accentGlow": "rgba(155, 142, 196, 0.3)",
+    "mood": "soft, protective, gentle"
+  },
+  "ignis": {
+    "backgroundGradient": "radial-gradient(ellipse at 50% 0%, #3d1800 0%, #1a1535 50%, #0e0c22 100%)",
+    "particleColor": "#ff8b6a",
+    "accentGlow": "rgba(255, 139, 106, 0.3)",
+    "mood": "warm, energetic, transforming"
+  },
+  "pluma": {
+    "backgroundGradient": "radial-gradient(ellipse at 50% 0%, #0a2a2a 0%, #1a1535 50%, #0e0c22 100%)",
+    "particleColor": "#7ec8c8",
+    "accentGlow": "rgba(126, 200, 200, 0.3)",
+    "mood": "delicate, gentle, releasing"
+  },
+  "nox": {
+    "backgroundGradient": "radial-gradient(ellipse at 50% 0%, #1a0a3a 0%, #1a1535 50%, #0e0c22 100%)",
+    "particleColor": "#5c4a8a",
+    "accentGlow": "rgba(92, 74, 138, 0.3)",
+    "mood": "mysterious, safe, starlit"
+  },
+  "soli": {
+    "backgroundGradient": "radial-gradient(ellipse at 50% 0%, #2a2000 0%, #1a1535 50%, #0e0c22 100%)",
+    "particleColor": "#ffd166",
+    "accentGlow": "rgba(255, 209, 102, 0.3)",
+    "mood": "warm, connecting, luminous"
+  }
+}

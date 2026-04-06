@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Deep space glow -->
+  <circle cx="100" cy="100" r="85" fill="url(#noxGlow)" opacity="0.35"/>
+  <!-- Star cloak / body base -->
+  <ellipse cx="100" cy="118" rx="52" ry="54" fill="url(#noxBody)"/>
+  <!-- Star pattern on body -->
+  <path d="M80 110 L82 104 L84 110 L90 112 L84 114 L82 120 L80 114 L74 112Z" fill="#c4b8e8" opacity="0.5"/>
+  <path d="M112 128 L114 123 L116 128 L121 130 L116 132 L114 137 L112 132 L107 130Z" fill="#c4b8e8" opacity="0.4"/>
+  <!-- Crescent moon on chest -->
+  <path d="M92 108 Q100 100 108 108 Q100 104 92 108Z" fill="#ffd166" opacity="0.8"/>
+  <!-- Ear / horn shapes -->
+  <path d="M78 68 L72 48 L86 62" fill="url(#noxBody)"/>
+  <path d="M122 68 L128 48 L114 62" fill="url(#noxBody)"/>
+  <!-- Stars on horns -->
+  <circle cx="72" cy="48" r="4" fill="#ffd166"/>
+  <circle cx="128" cy="48" r="4" fill="#ffd166"/>
+  <!-- Eyes - mysterious, calm, kind -->
+  <ellipse cx="86" cy="100" rx="10" ry="9" fill="#e8e4f5"/>
+  <ellipse cx="114" cy="100" rx="10" ry="9" fill="#e8e4f5"/>
+  <!-- Pupils - vertical like a gentle cat -->
+  <ellipse cx="86" cy="101" rx="5" ry="6.5" fill="#2a1a5a"/>
+  <ellipse cx="114" cy="101" rx="5" ry="6.5" fill="#2a1a5a"/>
+  <!-- Eye shimmer -->
+  <circle cx="89" cy="98" r="2.5" fill="white"/>
+  <circle cx="117" cy="98" r="2.5" fill="white"/>
+  <circle cx="83" cy="103" r="1" fill="#9b8ec4" opacity="0.8"/>
+  <circle cx="111" cy="103" r="1" fill="#9b8ec4" opacity="0.8"/>
+  <!-- Calm brows -->
+  <path d="M80 88 Q86 85 92 88" stroke="#9b8ec4" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M108 88 Q114 85 120 88" stroke="#9b8ec4" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Gentle smile -->
+  <path d="M90 116 Q100 122 110 116" stroke="#9b8ec4" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Blush subtle -->
+  <ellipse cx="76" cy="110" rx="7" ry="4" fill="#9b8ec4" opacity="0.25"/>
+  <ellipse cx="124" cy="110" rx="7" ry="4" fill="#9b8ec4" opacity="0.25"/>
+  <!-- Floating stars around -->
+  <path d="M42 70 L44 65 L46 70 L51 72 L46 74 L44 79 L42 74 L37 72Z" fill="#ffd166" opacity="0.7"/>
+  <path d="M152 65 L154 60 L156 65 L161 67 L156 69 L154 74 L152 69 L147 67Z" fill="#ffd166" opacity="0.6"/>
+  <circle cx="48" cy="130" r="3" fill="#c4b8e8" opacity="0.6"/>
+  <circle cx="155" cy="120" r="4" fill="#c4b8e8" opacity="0.5"/>
+  <circle cx="160" cy="150" r="2.5" fill="#ffd166" opacity="0.7"/>
+  <circle cx="40" cy="150" r="3" fill="#ffd166" opacity="0.6"/>
+  <defs>
+    <radialGradient id="noxGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5c4a8a"/>
+      <stop offset="100%" stop-color="#1a1535" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="noxBody" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4a3880"/>
+      <stop offset="100%" stop-color="#1a1040"/>
+    </radialGradient>
+  </defs>
+</svg>

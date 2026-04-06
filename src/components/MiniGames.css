@@ -1,0 +1,396 @@
+/* ===================================================
+   MINI-JEUX — Styles partagés
+   =================================================== */
+
+.minigame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  width: 100%;
+  max-width: 420px;
+  animation: fadeInUp 0.5s ease both;
+}
+
+.minigame__title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-cream);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.minigame__subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.minigame__instruction {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-lavender-pale);
+  text-align: center;
+  line-height: 1.5;
+  min-height: 44px;
+}
+
+.minigame__cta {
+  background: var(--accent);
+  color: var(--color-night);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--space-md) var(--space-xl);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--transition-med), box-shadow var(--transition-fast);
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  letter-spacing: 0.02em;
+}
+
+.minigame__cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* ===================================================
+   BREATH CLOUD
+   =================================================== */
+
+.breath-cloud {
+  position: relative;
+  width: 160px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.breath-cloud__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breath-cloud__puff {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(196, 184, 232, 0.4);
+  transition: all 4s ease-in-out;
+}
+.breath-cloud__puff--1 { width: 90px; height: 70px; }
+.breath-cloud__puff--2 { width: 60px; height: 60px; left: 20px; top: 10px; }
+.breath-cloud__puff--3 { width: 60px; height: 60px; right: 20px; top: 10px; }
+
+.breath-cloud.inhale .breath-cloud__puff {
+  transform: scale(1.35);
+  background: color-mix(in srgb, var(--accent) 50%, rgba(255,255,255,0.3));
+}
+.breath-cloud.exhale .breath-cloud__puff {
+  transform: scale(0.85);
+  background: rgba(196, 184, 232, 0.25);
+}
+
+.breath-cloud__stars {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+  color: var(--color-yellow);
+  font-size: 12px;
+}
+.breath-cloud__stars span {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.breath-counter {
+  display: flex;
+  gap: 10px;
+}
+
+.breath-counter__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: all var(--transition-med);
+}
+.breath-counter__dot.active {
+  background: var(--accent);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.breath-counter__dot.done {
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* ===================================================
+   MONSTER SHRINK
+   =================================================== */
+
+.shrink-stage {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.shrink-monster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+}
+
+.shrink-monster__emoji {
+  font-size: 72px;
+  line-height: 1;
+}
+
+.shrink-monster__glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.shrink-monster--tiny .shrink-monster__emoji {
+  filter: grayscale(0.8);
+}
+
+.shrink-success {
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeInUp 0.5s ease both;
+}
+.shrink-success span { font-size: 40px; }
+.shrink-success p { font-size: 13px; color: var(--color-lavender-pale); font-weight: 600; }
+
+.shrink-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.shrink-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.shrink-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.1);
+  outline: none;
+  cursor: pointer;
+}
+.shrink-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 60%, transparent);
+  transition: transform var(--transition-fast);
+}
+.shrink-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* ===================================================
+   FIRE CALM
+   =================================================== */
+
+.fire-stage {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 200px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 90, 30, 0.04);
+  border: 1px solid rgba(255, 139, 106, 0.15);
+  overflow: hidden;
+  transition: box-shadow 0.5s ease;
+}
+
+.fire-stage__entity {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.ember {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform var(--transition-med), opacity 0.4s ease;
+  animation: float 3s ease-in-out infinite;
+  line-height: 1;
+  padding: 4px;
+}
+.ember:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+.ember--out {
+  font-size: 16px;
+  opacity: 0.5;
+  animation: none;
+  cursor: default;
+}
+
+.fire-counter {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 3px 12px;
+}
+
+/* ===================================================
+   RAIN RELEASE
+   =================================================== */
+
+.rain-stage {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(126,200,200,0.05) 0%, transparent 100%);
+  border: 1px solid rgba(126,200,200,0.15);
+  overflow: hidden;
+}
+
+.raindrop {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: rainFloat 3s ease-in-out infinite;
+  padding: 4px;
+  transition: transform var(--transition-med);
+}
+.raindrop:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+.raindrop__shape {
+  font-size: 22px;
+  display: block;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--accent) 60%, transparent));
+}
+.raindrop--gone {
+  animation: fadeOut 0.4s ease forwards;
+  cursor: default;
+  pointer-events: none;
+}
+
+.rain-clear {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  animation: fadeInUp 0.5s ease both;
+}
+.rain-clear span { font-size: 40px; }
+.rain-clear p { font-size: 13px; color: var(--color-lavender-pale); font-weight: 600; }
+
+.rain-progress {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+}
+
+@keyframes rainFloat {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-8px); }
+}
+
+@keyframes fadeOut {
+  to { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+/* ===================================================
+   LIGHT LINKS
+   =================================================== */
+
+.links-stage {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+.links-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.link-node {
+  transition: all 0.3s ease;
+}
+
+.links-complete {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.5s ease both;
+}
+.links-complete span { font-size: 40px; }
+.links-complete p { font-size: 13px; color: var(--color-lavender-pale); font-weight: 600; text-align: center; padding: 0 16px; }
+
+.links-progress {
+  font-size: 13px;
+  font-weight: 700;
+}

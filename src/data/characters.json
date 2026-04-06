@@ -1,0 +1,20 @@
+{
+  "milo": {
+    "id": "milo",
+    "name": "Milo",
+    "role": "guide",
+    "description": "Petite créature lumineuse et ronde, très expressive et douce.",
+    "color": "#c4b8e8",
+    "greeting": [
+      "Coucou… moi c'est Milo.",
+      "Si quelque chose te travaille, on peut le regarder ensemble.",
+      "Tu n'as pas besoin de tout comprendre tout de suite."
+    ],
+    "phrases": {
+      "welcome_back": "Tu es revenu ! Je suis content de te voir.",
+      "choosing": "Dis-moi… qu'est-ce qui est là, en ce moment ?",
+      "end": "Tu as fait quelque chose de courageux aujourd'hui. Je suis fier de toi.",
+      "short_session": "C'est bien d'essayer dans la vraie vie maintenant. On se retrouve quand tu veux."
+    }
+  }
+}

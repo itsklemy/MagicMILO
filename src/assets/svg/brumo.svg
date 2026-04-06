@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer glow -->
+  <circle cx="100" cy="105" r="80" fill="url(#brumoGlow)" opacity="0.25"/>
+  <!-- Fluffy cloud body - multiple overlapping circles -->
+  <circle cx="100" cy="115" r="45" fill="url(#brumoBody)"/>
+  <circle cx="72" cy="100" r="32" fill="url(#brumoBody)"/>
+  <circle cx="128" cy="100" r="32" fill="url(#brumoBody)"/>
+  <circle cx="85" cy="82" r="26" fill="url(#brumoBody)"/>
+  <circle cx="115" cy="82" r="26" fill="url(#brumoBody)"/>
+  <circle cx="100" cy="74" r="22" fill="url(#brumoBody)"/>
+  <!-- Soft fur texture -->
+  <circle cx="60" cy="108" r="12" fill="#e8e4f5" opacity="0.6"/>
+  <circle cx="140" cy="108" r="12" fill="#e8e4f5" opacity="0.6"/>
+  <!-- Eyes - soft and round -->
+  <circle cx="87" cy="100" r="9" fill="#f8f6ff"/>
+  <circle cx="113" cy="100" r="9" fill="#f8f6ff"/>
+  <circle cx="88" cy="101" r="5.5" fill="#5c4a8a"/>
+  <circle cx="114" cy="101" r="5.5" fill="#5c4a8a"/>
+  <!-- Eye shine -->
+  <circle cx="91" cy="98.5" r="2" fill="white"/>
+  <circle cx="117" cy="98.5" r="2" fill="white"/>
+  <!-- Tiny worried brow - slightly curved -->
+  <path d="M82 90 Q87 87 92 90" stroke="#9b8ec4" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M108 90 Q113 87 118 90" stroke="#9b8ec4" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Little shy mouth -->
+  <path d="M93 114 Q100 119 107 114" stroke="#9b8ec4" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Blush spots -->
+  <ellipse cx="78" cy="110" rx="7" ry="4" fill="#c4b8e8" opacity="0.4"/>
+  <ellipse cx="122" cy="110" rx="7" ry="4" fill="#c4b8e8" opacity="0.4"/>
+  <!-- Little floating dots around -->
+  <circle cx="46" cy="85" r="4" fill="#c4b8e8" opacity="0.5"/>
+  <circle cx="154" cy="82" r="3" fill="#c4b8e8" opacity="0.4"/>
+  <circle cx="148" cy="130" r="5" fill="#e8e4f5" opacity="0.5"/>
+  <circle cx="52" cy="128" r="4" fill="#e8e4f5" opacity="0.4"/>
+  <defs>
+    <radialGradient id="brumoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c4b8e8"/>
+      <stop offset="100%" stop-color="#c4b8e8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="brumoBody" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f0edf8"/>
+      <stop offset="100%" stop-color="#c4b8e8"/>
+    </radialGradient>
+  </defs>
+</svg>

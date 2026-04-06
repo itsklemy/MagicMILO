@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Glow halo -->
+  <circle cx="100" cy="100" r="85" fill="url(#miloGlow)" opacity="0.3"/>
+  <!-- Body - round soft shape -->
+  <ellipse cx="100" cy="108" rx="52" ry="56" fill="url(#miloBody)"/>
+  <!-- Inner glow -->
+  <ellipse cx="100" cy="105" rx="38" ry="40" fill="url(#miloInner)" opacity="0.4"/>
+  <!-- Eyes - large expressive -->
+  <circle cx="84" cy="98" r="10" fill="#f8f4ff"/>
+  <circle cx="116" cy="98" r="10" fill="#f8f4ff"/>
+  <circle cx="86" cy="99" r="6" fill="#4a3580"/>
+  <circle cx="118" cy="99" r="6" fill="#4a3580"/>
+  <!-- Eye shine -->
+  <circle cx="89" cy="96" r="2.5" fill="white"/>
+  <circle cx="121" cy="96" r="2.5" fill="white"/>
+  <!-- Smile -->
+  <path d="M88 114 Q100 124 112 114" stroke="#9b8ec4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Cheeks blush -->
+  <ellipse cx="76" cy="110" rx="8" ry="5" fill="#f2c4ce" opacity="0.5"/>
+  <ellipse cx="124" cy="110" rx="8" ry="5" fill="#f2c4ce" opacity="0.5"/>
+  <!-- Little arms -->
+  <ellipse cx="54" cy="120" rx="12" ry="8" fill="url(#miloBody)" transform="rotate(-20, 54, 120)"/>
+  <ellipse cx="146" cy="120" rx="12" ry="8" fill="url(#miloBody)" transform="rotate(20, 146, 120)"/>
+  <!-- Sparkles -->
+  <path d="M62 62 L64 58 L66 62 L70 64 L66 66 L64 70 L62 66 L58 64Z" fill="#ffd166" opacity="0.8"/>
+  <path d="M134 52 L136 48 L138 52 L142 54 L138 56 L136 60 L134 56 L130 54Z" fill="#c4b8e8" opacity="0.7"/>
+  <circle cx="148" cy="72" r="3" fill="#ffd166" opacity="0.6"/>
+  <circle cx="52" cy="80" r="2" fill="#f2c4ce" opacity="0.7"/>
+  <defs>
+    <radialGradient id="miloGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c4b8e8"/>
+      <stop offset="100%" stop-color="#9b8ec4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="miloBody" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#e8e0f8"/>
+      <stop offset="100%" stop-color="#9b8ec4"/>
+    </radialGradient>
+    <radialGradient id="miloInner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="100%" stop-color="#c4b8e8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

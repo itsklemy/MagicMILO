@@ -1,0 +1,24 @@
+.progress-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.progress-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: transform var(--transition-med), background var(--transition-fast);
+}
+
+.progress-dot--active {
+  background: var(--dot-color);
+  transform: scale(1.4);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--dot-color) 60%, transparent);
+}
+
+.progress-dot--done {
+  background: color-mix(in srgb, var(--dot-color) 50%, transparent);
+  transform: scale(1);
+}
