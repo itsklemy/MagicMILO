@@ -50,7 +50,7 @@
       "id": "pluma_heavy",
       "condition": "tristesse très lourde",
       "formula": "Je peux poser ma peine ici. Je n'ai pas besoin de la porter seul.",
-      "gesture": "Dis à voix haute ce qui est lourd. Une seule phrase. Tu peux le murmurer."
+      "gesture": "Dis à voix haute ce qui est lourd. Et laisse la charge s'envoler.Tu peux le murmurer."
     },
     {
       "id": "pluma_hug",
@@ -84,19 +84,19 @@
       "id": "soli_nobody",
       "condition": "personne n'est là",
       "formula": "Même quand je me sens seul, un lien peut revenir.",
-      "gesture": "Pense à une personne qui t'aime, même loin. Elle existe encore."
+      "gesture": "Pense à une personne qui t'aime, même loin. Elle pense fort à toi."
     },
     {
       "id": "soli_understood",
       "condition": "personne ne comprend",
       "formula": "Ne pas être compris n'est pas la même chose qu'être seul.",
-      "gesture": "Écris ou dessine ce que tu ressens. Pour toi. Juste pour toi."
+      "gesture": "Écris ou dessine ce que tu ressens. Juste pour toi."
     },
     {
       "id": "soli_connect",
       "condition": "envie d'être proche de quelqu'un",
       "formula": "Je peux faire un petit signe à quelqu'un aujourd'hui.",
-      "gesture": "Pense à une personne. Fais-lui un signe — un sourire, un mot, un dessin."
+      "gesture": "Pense à une personne. Fais-lui un mot, un dessin."
     }
   ]
 }

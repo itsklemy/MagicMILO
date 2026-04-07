@@ -20,7 +20,7 @@ export default function EntitySelectionScreen({ onSelect }) {
         <div className="entity-screen__header">
           <p className="entity-screen__milo">Milo te demande :</p>
           <h2 className="entity-screen__question">
-            Qu'est-ce qui est là,<br />en ce moment ?
+            Qu'est-ce que tu ressens là,<br />en ce moment ?
           </h2>
         </div>
 
@@ -37,7 +37,7 @@ export default function EntitySelectionScreen({ onSelect }) {
         </div>
 
         <p className="entity-screen__note">
-          Tu peux choisir ce qui se rapproche le plus de ce que tu ressens.
+          Choisis ce qui se rapproche le plus de ce que ton émotion.
         </p>
       </div>
     </div>

@@ -27,7 +27,7 @@ export default function OpeningBookScreen({ onOpen }) {
 
       {/* Note du bas – sessions courtes */}
       <footer className="opening-footer">
-        <p>Une courte session pour toi, puis retour dans la vraie vie ✦</p>
+        <p>Un court sort, puis retour dans la vraie vie ✦</p>
       </footer>
     </div>
   );
