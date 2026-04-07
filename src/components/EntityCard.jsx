@@ -26,27 +26,23 @@ export default function EntityCard({ entity, onSelect, index = 0 }) {
       onKeyDown={e => e.key === 'Enter' && onSelect(entity.id)}
       aria-label={`Parler à ${entity.name} — ${entity.emotion_label}`}
     >
-      {/* Glow derrière la carte */}
       <div className="entity-card__glow" />
 
-      {/* Avatar */}
       <div className="entity-card__avatar">
         <img
-          src={`/src/assets/svg/${entity.id}.svg`}
+          src={`/svg/${entity.id}.svg`}
           alt={entity.name}
           className={`entity-card__img ${isHovered ? 'entity-card__img--hover' : ''}`}
           draggable={false}
         />
       </div>
 
-      {/* Texte */}
       <div className="entity-card__content">
         <h3 className="entity-card__name">{entity.name}</h3>
         <p className="entity-card__label">{entity.emotion_label}</p>
         <p className="entity-card__subtitle">{entity.subtitle}</p>
       </div>
 
-      {/* Bouton d'action */}
       <div className="entity-card__cta">
         <span>Aller voir →</span>
       </div>
