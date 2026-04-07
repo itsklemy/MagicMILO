@@ -123,7 +123,7 @@ export default function ConversationScreen({ entityId, onEnd }) {
 
         <div className="conversation__entity-badge">
           <img
-            src={`/src/assets/svg/${entityId}.svg`}
+            src={`/svg/${entityId}.svg`}
             alt={entity?.name}
             className="conversation__entity-avatar"
           />
@@ -277,7 +277,7 @@ function NodeRenderer({ node, entity, entityColor, entityId, formula, onAdvance,
       return (
         <div className="node-end">
           <div className="node-end__milo">
-            <img src="/src/assets/svg/milo.svg" alt="Milo" className="node-end__milo-img" />
+            <img src="/svg/milo.svg" alt="Milo" className="node-end__milo-img" />
           </div>
           <ChatBubble text={node.text} speaker="entity" entityColor="#c4b8e8" />
           <button
