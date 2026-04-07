@@ -49,3 +49,4 @@ export default function EntityCard({ entity, onSelect, index = 0 }) {
     </div>
   );
 }
+     
