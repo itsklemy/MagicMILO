@@ -42,7 +42,7 @@ export default function MiniGameFireCalm({ onComplete, entityColor = '#ff8b6a' }
       >
         {/* Ignis en fond */}
         <img
-          src="/src/assets/svg/ignis.svg"
+          src="/svg/ignis.svg"
           alt=""
           className="fire-stage__entity"
           style={{ opacity: 0.15 + intensity * 0.25 }}

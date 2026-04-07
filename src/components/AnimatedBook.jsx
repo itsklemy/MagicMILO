@@ -31,7 +31,7 @@ export default function AnimatedBook({ onOpen }) {
       {/* Le livre SVG */}
       <div className="book-container">
         <img
-          src="/src/assets/svg/book.svg"
+          src="/svg/book.svg"
           alt="Le Grimoire Magique"
           className="book-image"
           draggable={false}

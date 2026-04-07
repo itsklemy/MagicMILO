@@ -17,7 +17,7 @@ export default function GuideCard({ lines, animated = true }) {
       <div className="guide-avatar">
         <div className="guide-avatar-glow" />
         <img
-          src="/src/assets/svg/milo.svg"
+          src="/svg/milo.svg"
           alt="Milo, ton guide"
           className="guide-avatar-img"
           draggable={false}

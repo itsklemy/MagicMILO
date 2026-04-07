@@ -24,7 +24,7 @@ export default function EndScreen({ entityColor = '#c4b8e8', entityId, onRestart
       <div className="end-screen__content">
         {/* Milo */}
         <div className="end-screen__milo">
-          <img src="/src/assets/svg/milo.svg" alt="Milo" draggable={false} />
+          <img src="/svg/milo.svg" alt="Milo" draggable={false} />
         </div>
 
         {/* Message final */}
