@@ -1,5 +1,5 @@
 {
-  "appId": "com.auth.cercle",
-  "appName": "Le Grimoire Magique",
+  "appId": "com.magicgrimoire.app",
+  "appName": "MagicMILO",
   "webDir": "dist"
 }

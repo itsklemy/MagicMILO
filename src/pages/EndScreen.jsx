@@ -46,7 +46,7 @@ export default function EndScreen({ entityColor = '#c4b8e8', entityId, onRestart
 
         {/* Action */}
         <button className="end-screen__btn" onClick={onRestart}>
-          Retourner au grimoire
+          Retourner vers le grimoire 
         </button>
       </div>
     </div>
