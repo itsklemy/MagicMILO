@@ -120,7 +120,11 @@ button {
   cursor: pointer;
   font-family: var(--font-body);
 }
-
+/* Tous les SVG dans l'app */
+img[src$=".svg"] {
+  width: 120px;
+  height: auto;
+}
 /* ===================================================
    ANIMATIONS GLOBALES
    =================================================== */
