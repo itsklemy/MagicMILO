@@ -1,6 +1,6 @@
 # Le Grimoire Magique 🌙✨
 
-Application interactive pour enfants de 6 à 10 ans qui aide à reconnaître, comprendre et apaiser les émotions à travers un univers de grimoire enchanté.
+Application interactive pour enfants de 6 à 10 ans qui aide à reconnaître, comprendre et apaiser les émotions à travers un univers de MILO et son grimoire enchanté.
 
 ---
 

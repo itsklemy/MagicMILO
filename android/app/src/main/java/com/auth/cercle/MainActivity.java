@@ -1,4 +1,4 @@
-package com.auth.cercle;
+package com.magicgrimoire.app;
 
 import com.getcapacitor.BridgeActivity;
 
