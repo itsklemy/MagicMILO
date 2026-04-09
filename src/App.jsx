@@ -11,12 +11,17 @@ import { useAuth }           from './hooks/useAuth';
 import entitiesData          from './data/entities.json';
 import lunaData              from './data/luna.json';
 import SettingsScreen from './pages/SettingsScreen'
+import amoraData from './data/amora.json';
+import philoData from './data/philo.json';
+import PotionProgress, { PotionFloatingIcon } from './components/PotionProgress';
 
 import './styles/transitions.css';
 
 const ALL_ENTITIES = {
   ...entitiesData,
   ...lunaData,
+  ...amoraData,
+  ...philoData,
 };
 
 const SCREENS = {
@@ -27,9 +32,9 @@ const SCREENS = {
   CONVERSATION:     'conversation',
   END:              'end',
   LEGAL:            'legal',
-  SETTINGS: 'settings',
+  SETTINGS:         'settings',
+  GRIMOIRE:         'grimoire',
 };
-
 export default function App() {
   const [screen,          setScreen]          = useState(SCREENS.OPENING);
   const [selectedEntity,  setSelectedEntity]  = useState(null);
@@ -158,6 +163,14 @@ export default function App() {
     />
   );
 
+
+  case SCREENS.GRIMOIRE:
+  return (
+    <PotionProgress
+      onClose={() => navigateTo(SCREENS.HOME)}
+    />
+  );
+
       case SCREENS.LEGAL:
         return (
           <LegalScreen
@@ -165,6 +178,8 @@ export default function App() {
             onClose={() => navigateTo(SCREENS.HOME)}
           />
         );
+
+
 
       default:
         return <OpeningBookScreen onOpen={handleBookOpen} />;
