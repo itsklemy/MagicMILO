@@ -3,10 +3,18 @@ import GuideCard from '../components/GuideCard';
 import FloatingParticles from '../components/FloatingParticles';
 import './HomeScreen.css';
 
-export default function HomeScreen({ onContinue, onShowPremium, onShowLegal, isPremium }) {
+export default function HomeScreen({
+  onContinue,
+  onShowPremium,
+  onShowLegal,
+  onShowSettings,
+  isPremium,
+}) {
   return (
     <div className="home-screen">
       <FloatingParticles color="#c4b8e8" count={14} />
+
+      <button className="home-settings-btn" onClick={onShowSettings}>⚙️</button>
 
       <div className="home-content">
         <GuideCard animated />
@@ -14,13 +22,6 @@ export default function HomeScreen({ onContinue, onShowPremium, onShowLegal, isP
         <button className="home-cta" onClick={onContinue}>
           Qu'est-ce qu'il y a en ce moment ?
         </button>
-
-        <button
-  className="home-account-btn"
-  onClick={onShowSettings}
->
-  ⚙️
-</button>
 
         {!isPremium && (
           <button className="home-premium-btn" onClick={onShowPremium}>
