@@ -1,4 +1,3 @@
-cat > netlify/functions/verify-session.js << 'EOF'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
@@ -10,13 +9,13 @@ exports.handler = async (event) => {
     const { sessionId } = JSON.parse(event.body);
 
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['subscription', 'customer']
+      expand: ['subscription', 'customer'],
     });
 
     if (session.payment_status !== 'paid') {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Paiement non complété' })
+        body: JSON.stringify({ error: 'Paiement non complété' }),
       };
     }
 
@@ -24,7 +23,7 @@ exports.handler = async (event) => {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
         isPremium: true,
@@ -34,14 +33,14 @@ exports.handler = async (event) => {
         email: session.customer?.email || session.customer_email,
         currentPeriodEnd: session.subscription?.current_period_end
           ? new Date(session.subscription.current_period_end * 1000).toISOString()
-          : null
-      })
+          : null,
+      }),
     };
   } catch (error) {
+    console.error('Verify session error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
-EOF
