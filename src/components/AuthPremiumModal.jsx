@@ -22,15 +22,17 @@ export default function AuthPremiumModal({
 
   if (!isOpen) return null;
 
-  const handleGoogleLogin = async () => {
-    const result = await onGoogleLogin();
-    if (result.success) setStep('payment');
-  };
+const handleGoogleLogin = async () => {
+  // Sauvegarde le plan AVANT la redirection OAuth
+  localStorage.setItem('magicmilo_pending_plan', 'monthly')
+  await onGoogleLogin()
+  // La page va être redirigée vers Google — rien après ici
+}
 
-  const handleAppleLogin = async () => {
-    const result = await onAppleLogin();
-    if (result.success) setStep('payment');
-  };
+const handleAppleLogin = async () => {
+  localStorage.setItem('magicmilo_pending_plan', 'monthly')
+  await onAppleLogin()
+}
 
   const handlePurchase = async () => {
     await onPurchase();
