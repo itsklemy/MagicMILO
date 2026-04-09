@@ -15,6 +15,13 @@ export default function HomeScreen({ onContinue, onShowPremium, onShowLegal, isP
           Qu'est-ce qu'il y a en ce moment ?
         </button>
 
+        <button
+  className="home-account-btn"
+  onClick={onShowSettings}
+>
+  ⚙️
+</button>
+
         {!isPremium && (
           <button className="home-premium-btn" onClick={onShowPremium}>
             ✦ Découvrir le monde Premium

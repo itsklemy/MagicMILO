@@ -10,6 +10,8 @@ import { PremiumEntityShowcase } from './components/EntityPresence';
 import { useAuth }           from './hooks/useAuth';
 import entitiesData          from './data/entities.json';
 import lunaData              from './data/luna.json';
+import SettingsScreen from './pages/SettingsScreen'
+
 import './styles/transitions.css';
 
 const ALL_ENTITIES = {
@@ -25,6 +27,7 @@ const SCREENS = {
   CONVERSATION:     'conversation',
   END:              'end',
   LEGAL:            'legal',
+  SETTINGS: 'settings',
 };
 
 export default function App() {
@@ -142,6 +145,17 @@ export default function App() {
             onRestart={handleEndRestart}
           />
         );
+
+        case SCREENS.SETTINGS:
+  return (
+    <SettingsScreen
+      isPremium={isPremium}
+      user={user}
+      onLogout={logout}
+      onClose={() => navigateTo(SCREENS.HOME)}
+      onRestore={restorePurchase}
+    />
+  );
 
       case SCREENS.LEGAL:
         return (

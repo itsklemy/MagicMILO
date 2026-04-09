@@ -266,3 +266,19 @@
   padding: 8px;
 }
 .auth-modal__back:hover { color: rgba(196,184,232,.7); }
+
+.auth-modal__cta-secondary-purchase {
+  background: none;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50px;
+  padding: 12px;
+  color: rgba(255,255,255,.5);
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: all .2s;
+}
+.auth-modal__cta-secondary-purchase:hover {
+  border-color: rgba(255,255,255,.3);
+  color: rgba(255,255,255,.8);
+}
