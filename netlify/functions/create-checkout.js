@@ -1,4 +1,3 @@
-cat > netlify/functions/create-checkout.js << 'EOF'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
@@ -30,31 +29,21 @@ exports.handler = async (event) => {
       metadata: { userId, plan: plan || 'monthly', app: 'magic-milo' },
       locale: 'fr',
       allow_promotion_codes: true,
-      custom_text: {
-        submit: {
-          message: 'En confirmant, vous acceptez les CGV de Ora Studio. Résiliation possible à tout moment.'
-        }
-      }
     });
 
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
       },
-      body: JSON.stringify({
-        url: session.url,
-        sessionId: session.id,
-        customerId: customer?.id
-      })
+      body: JSON.stringify({ url: session.url, sessionId: session.id }),
     };
   } catch (error) {
     console.error('Stripe error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
-EOF
