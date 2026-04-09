@@ -2,10 +2,17 @@ import React from 'react';
 import EntityCard from '../components/EntityCard';
 import FloatingParticles from '../components/FloatingParticles';
 import entitiesData from '../data/entities.json';
-import lunaData from '../data/luna.json';
+import lunaData     from '../data/luna.json';
+import amoraData    from '../data/amora.json';
+import philoData    from '../data/philo.json';
 import './EntitySelectionScreen.css';
 
-const ALL_ENTITIES = { ...entitiesData, ...lunaData };
+const ALL_ENTITIES = {
+  ...entitiesData,
+  ...lunaData,
+  ...amoraData,
+  ...philoData,
+};
 
 export default function EntitySelectionScreen({
   onSelect,
@@ -17,7 +24,6 @@ export default function EntitySelectionScreen({
   return (
     <div className="entity-screen">
       <FloatingParticles color="#c4b8e8" count={10} />
-
       <div className="entity-screen__inner">
 
         <div className="entity-screen__header">
@@ -34,22 +40,20 @@ export default function EntitySelectionScreen({
               entity={entity}
               onSelect={onSelect}
               index={i}
-              isPremium={entity.isPremium}
+              isPremiumEntity={entity.isPremium}
+              isUnlocked={isPremium || !entity.isPremium}
             />
           ))}
         </div>
 
         {!isPremium && (
-          <button
-            className="entity-screen__premium-cta"
-            onClick={onShowPremium}
-          >
-            ✦ Voir tous les parcours Premium
+          <button className="entity-screen__premium-cta" onClick={onShowPremium}>
+            ✦ Débloquer Luna, Amora et Philo
           </button>
         )}
 
         <p className="entity-screen__note">
-          Tu peux choisir ce qui se rapproche le plus de ce que tu ressens.
+          Choisis ce qui se rapproche le plus de ce que tu ressens.
         </p>
       </div>
     </div>

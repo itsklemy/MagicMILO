@@ -14,6 +14,7 @@ import SettingsScreen from './pages/SettingsScreen'
 import amoraData from './data/amora.json';
 import philoData from './data/philo.json';
 import PotionProgress, { PotionFloatingIcon } from './components/PotionProgress';
+import RouteSelectScreen from './pages/RouteSelectScreen';
 
 import './styles/transitions.css';
 
@@ -34,6 +35,7 @@ const SCREENS = {
   LEGAL:            'legal',
   SETTINGS:         'settings',
   GRIMOIRE:         'grimoire',
+  ROUTE_SELECT: 'route-select',
 };
 export default function App() {
   const [screen,          setScreen]          = useState(SCREENS.OPENING);
@@ -57,6 +59,7 @@ export default function App() {
     logout,
   } = useAuth();
 
+
   const navigateTo = (nextScreen, entityId = null, routeId = null) => {
     setIsTransitioning(true);
     setTimeout(() => {
@@ -78,14 +81,27 @@ export default function App() {
     navigateTo(SCREENS.LEGAL);
   };
 
-  const handleEntitySelect = (entityId, routeId = null) => {
-    const entity = ALL_ENTITIES[entityId];
-    if (entity?.isPremium) {
-      const allowed = requirePremium('unlock_entity_' + entityId);
-      if (!allowed) return;
-    }
-    navigateTo(SCREENS.CONVERSATION, entityId, routeId);
-  };
+const [routeSelectEntity, setRouteSelectEntity] = useState(null);
+
+  const handleEntitySelect = (entityId) => {
+  const entity = ALL_ENTITIES[entityId];
+  
+  // Entité premium non débloquée
+  if (entity?.isPremium && !isPremium) {
+    requirePremium('unlock_entity_' + entityId);
+    return;
+  }
+  
+  // Utilisateur premium sur entité avec parcours premium → écran de choix
+  if (isPremium && premiumRoutes[entityId]) {
+    setRouteSelectEntity(entityId);
+    navigateTo(SCREENS.ROUTE_SELECT);
+    return;
+  }
+  
+  // Sinon flow gratuit
+  navigateTo(SCREENS.CONVERSATION, entityId, null);
+};
 
   const handlePremiumRouteSelect = (entityId) => {
     const allowed = requirePremium('unlock_premium_route');
@@ -111,9 +127,13 @@ export default function App() {
       onShowLegal={handleShowLegal}
       onShowSettings={() => navigateTo(SCREENS.SETTINGS)}
       isPremium={isPremium}
+      
     />
   );
 
+  {isPremium && screen !== SCREENS.GRIMOIRE && screen !== SCREENS.OPENING && (
+  <PotionFloatingIcon onOpen={() => navigateTo(SCREENS.GRIMOIRE)} />
+)}
       case SCREENS.ENTITY_SELECT:
         return (
           <EntitySelectionScreen
@@ -160,9 +180,9 @@ export default function App() {
       onLogout={logout}
       onClose={() => navigateTo(SCREENS.HOME)}
       onRestore={restorePurchase}
+      onShowLegal={handleShowLegal}
     />
   );
-
 
   case SCREENS.GRIMOIRE:
   return (
@@ -178,6 +198,16 @@ export default function App() {
             onClose={() => navigateTo(SCREENS.HOME)}
           />
         );
+
+        case SCREENS.ROUTE_SELECT:
+  return (
+    <RouteSelectScreen
+      entityId={routeSelectEntity}
+      entity={ALL_ENTITIES[routeSelectEntity]}
+      onSelectRoute={(routeId) => navigateTo(SCREENS.CONVERSATION, routeSelectEntity, routeId)}
+      onBack={() => navigateTo(SCREENS.ENTITY_SELECT)}
+    />
+  );
 
 
 
