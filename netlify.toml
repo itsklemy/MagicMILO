@@ -6,6 +6,9 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "VITE_STRIPE_PRICE_MONTHLY,VITE_STRIPE_PRICE_YEARLY"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
