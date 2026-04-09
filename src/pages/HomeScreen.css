@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
   width: 100%;
   max-width: 440px;
   z-index: 1;
@@ -32,7 +32,6 @@
   transition: all var(--transition-med);
   letter-spacing: 0.01em;
   animation: fadeInUp 0.6s ease 0.9s both;
-  box-shadow: var(--shadow-soft);
   width: 100%;
 }
 
@@ -40,11 +39,42 @@
   background: linear-gradient(135deg, #4d4590, #3a3270);
   border-color: rgba(196, 184, 232, 0.6);
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(26, 21, 53, 0.3);
 }
 
 .home-cta:active {
   transform: translateY(0) scale(0.98);
+}
+
+.home-premium-btn {
+  background: linear-gradient(135deg, rgba(255,209,102,.12), rgba(240,192,96,.08));
+  border: 1.5px solid rgba(255,209,102,.35);
+  border-radius: var(--radius-full);
+  padding: var(--space-md) var(--space-xl);
+  color: #ffd166;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  letter-spacing: .02em;
+  animation: fadeInUp 0.6s ease 1.1s both;
+}
+
+.home-premium-btn:hover {
+  background: linear-gradient(135deg, rgba(255,209,102,.22), rgba(240,192,96,.16));
+  border-color: rgba(255,209,102,.65);
+  transform: translateY(-2px);
+}
+
+.home-premium-active {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffd166;
+  background: rgba(255,209,102,.1);
+  border: 1px solid rgba(255,209,102,.25);
+  border-radius: var(--radius-full);
+  padding: var(--space-sm) var(--space-lg);
+  animation: fadeIn 0.6s ease 1.1s both;
 }
 
 .home-note {
@@ -53,4 +83,37 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   animation: fadeIn 0.6s ease 1.2s both;
+}
+.home-legal {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.home-legal-btn {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: rgba(255,255,255,.25);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: color .2s;
+  padding: 0;
+}
+
+.home-legal-btn:hover {
+  color: rgba(255,255,255,.5);
+}
+
+.home-legal-dot {
+  font-size: 11px;
+  color: rgba(255,255,255,.15);
 }

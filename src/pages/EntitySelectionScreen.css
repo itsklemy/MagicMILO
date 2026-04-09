@@ -52,7 +52,6 @@
   width: 100%;
 }
 
-/* 5ème carte centrée si nombre impair */
 .entity-grid > *:last-child:nth-child(odd) {
   grid-column: 1 / -1;
   max-width: 260px;
@@ -68,6 +67,27 @@
     max-width: none;
     justify-self: auto;
   }
+}
+
+.entity-screen__premium-cta {
+  background: linear-gradient(135deg, rgba(255,209,102,.12), rgba(240,192,96,.08));
+  border: 1.5px solid rgba(255,209,102,.35);
+  border-radius: var(--radius-full);
+  padding: var(--space-md) var(--space-xl);
+  color: #ffd166;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  width: 100%;
+  letter-spacing: .02em;
+  animation: fadeInUp 0.5s ease 0.4s both;
+}
+
+.entity-screen__premium-cta:hover {
+  background: linear-gradient(135deg, rgba(255,209,102,.22), rgba(240,192,96,.16));
+  border-color: rgba(255,209,102,.65);
+  transform: translateY(-2px);
 }
 
 .entity-screen__note {

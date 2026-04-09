@@ -1,0 +1,27 @@
+{
+  "luna": {
+    "id": "luna",
+    "name": "Luna",
+    "isPremium": true,
+    "emotion": "confiance",
+    "emotion_label": "La Confiance en soi",
+    "subtitle": "Quand on doute de sa valeur",
+    "style": "Petite étoile-miroir dorée et douce",
+    "colors": {
+      "primary":    "#f0c060",
+      "secondary":  "#fff0a0",
+      "background": "#fffae8",
+      "text":       "#5a3a00"
+    },
+    "personality": "douce, encourageante, sans jamais être naïve",
+    "tone": "aide à retrouver la confiance en soi et l'estime de soi",
+    "power": "Refléter la lumière intérieure de l'enfant quand il ne la voit plus",
+    "intro": "Je suis Luna. Je suis là pour tous les moments où tu oublies ta valeur. Tu en as une. On va la retrouver ensemble.",
+    "phrases": {
+      "welcome":      "Luna est là. Et elle voit quelque chose en toi que tu ne vois peut-être pas encore.",
+      "midpoint":     "Tu avances. Même quand ça ne se voit pas de l'extérieur.",
+      "ending":       "Luna a vu ta lumière aujourd'hui. Elle espère que toi aussi tu l'as vue un peu.",
+      "formula_intro":"Voici la formule que Luna te confie pour cette nuit."
+    }
+  }
+}
