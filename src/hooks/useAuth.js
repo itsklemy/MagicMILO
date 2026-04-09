@@ -15,49 +15,46 @@ export function useAuth() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authIntent,    setAuthIntent]    = useState(null)
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+useEffect(() => {
+  // Vérifie d'abord le retour Stripe
+  const params = new URLSearchParams(window.location.search)
+  const sessionId = params.get('session_id')
+  if (sessionId) {
+    verifyPayment(sessionId)
+    window.history.replaceState({}, '', window.location.pathname)
+  }
+
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    setUser(session?.user ?? null)
+    _checkPremium()
+    setIsLoading(false)
+
+    // Récupère le plan en attente APRÈS connexion OAuth
+    const pendingPlan = localStorage.getItem(KEYS.PENDING_PLAN)
+    if (session?.user && pendingPlan) {
+      localStorage.removeItem(KEYS.PENDING_PLAN)
+      setTimeout(() => _launchStripe(session.user, pendingPlan), 800)
+    }
+  })
+
+  const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    (event, session) => {
       setUser(session?.user ?? null)
       _checkPremium()
-      setIsLoading(false)
 
-      // Si l'utilisateur vient de se connecter et avait un plan en attente
-      const pendingPlan = localStorage.getItem(KEYS.PENDING_PLAN)
-      if (session?.user && pendingPlan) {
-        localStorage.removeItem(KEYS.PENDING_PLAN)
-        // Lance le paiement automatiquement
-        setTimeout(() => {
-          _launchStripe(session.user, pendingPlan)
-        }, 500)
-      }
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null)
-        _checkPremium()
-
-        // Reprend le paiement après connexion OAuth
+      // SIGNED_IN = retour OAuth Google/Apple
+      if (event === 'SIGNED_IN') {
         const pendingPlan = localStorage.getItem(KEYS.PENDING_PLAN)
-        if (session?.user && pendingPlan) {
+        if (pendingPlan && session?.user) {
           localStorage.removeItem(KEYS.PENDING_PLAN)
-          setTimeout(() => {
-            _launchStripe(session.user, pendingPlan)
-          }, 500)
+          setTimeout(() => _launchStripe(session.user, pendingPlan), 800)
         }
       }
-    )
-
-    // Vérifie retour Stripe
-    const params = new URLSearchParams(window.location.search)
-    const sessionId = params.get('session_id')
-    if (sessionId) {
-      verifyPayment(sessionId)
-      window.history.replaceState({}, '', window.location.pathname)
     }
+  )
 
-    return () => subscription.unsubscribe()
-  }, [])
+  return () => subscription.unsubscribe()
+}, [])
 
   function _checkPremium() {
     const stored = localStorage.getItem(KEYS.PREMIUM)
