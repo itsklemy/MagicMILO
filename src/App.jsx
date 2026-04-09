@@ -99,14 +99,15 @@ export default function App() {
         return <OpeningBookScreen onOpen={handleBookOpen} />;
 
       case SCREENS.HOME:
-        return (
-          <HomeScreen
-            onContinue={handleStartJourney}
-            onShowPremium={handleShowPremium}
-            onShowLegal={handleShowLegal}
-            isPremium={isPremium}
-          />
-        );
+  return (
+    <HomeScreen
+      onContinue={handleStartJourney}
+      onShowPremium={handleShowPremium}
+      onShowLegal={handleShowLegal}
+      onShowSettings={() => navigateTo(SCREENS.SETTINGS)}
+      isPremium={isPremium}
+    />
+  );
 
       case SCREENS.ENTITY_SELECT:
         return (
