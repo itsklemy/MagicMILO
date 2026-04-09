@@ -28,7 +28,7 @@ export default function EntityCard({ entity, onSelect, index = 0, isPremium }) {
 
       <div className="entity-card__avatar">
         <img
-          src={`/src/assets/svg/${entity.id}.svg`}
+          src={`/svg/${entity.id}.svg`}
           alt={entity.name}
           className={`entity-card__img ${isHovered ? 'entity-card__img--hover' : ''}`}
           draggable={false}
