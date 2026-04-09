@@ -91,7 +91,7 @@ export default function AuthPremiumModal({
             </button>
 
             <button className="auth-modal__secondary" onClick={onClose}>
-              Continuer sans compte
+              Pas maintenant
             </button>
           </div>
         )}
