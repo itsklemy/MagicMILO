@@ -1,0 +1,90 @@
+<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="soliGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FFF4B8" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FFD166" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="soliBody" x1="120" y1="100" x2="210" y2="240">
+      <stop offset="0%" stop-color="#FFF7C8"/>
+      <stop offset="100%" stop-color="#FFD166"/>
+    </linearGradient>
+
+    <style>
+      .floaty {
+        animation: floaty 4s ease-in-out infinite;
+        transform-origin: 160px 170px;
+      }
+
+      .blink {
+        animation: blink 5.5s infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .glow {
+        animation: glow 2.5s ease-in-out infinite;
+        transform-origin: center;
+      }
+
+      @keyframes floaty {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+
+      @keyframes blink {
+        0%,44%,48%,100% { transform: scaleY(1); }
+        46% { transform: scaleY(0.08); }
+      }
+
+      @keyframes glow {
+        0%,100% { opacity: .7; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+      }
+    </style>
+  </defs>
+
+  <!-- halo lumineux -->
+  <ellipse class="glow" cx="160" cy="170" rx="110" ry="95" fill="url(#soliGlow)"/>
+
+  <g class="floaty">
+
+    <!-- ombre -->
+    <ellipse cx="160" cy="272" rx="50" ry="10" fill="#5A3A00" opacity=".08"/>
+
+    <!-- corps (forme luciole douce) -->
+    <ellipse cx="160" cy="175" rx="48" ry="60" fill="url(#soliBody)"/>
+
+    <!-- reflets -->
+    <ellipse cx="145" cy="150" rx="20" ry="25" fill="white" opacity=".25"/>
+
+    <!-- ailes -->
+    <ellipse cx="120" cy="155" rx="22" ry="30" fill="#FFF4B8" opacity=".6"/>
+    <ellipse cx="200" cy="155" rx="22" ry="30" fill="#FFF4B8" opacity=".6"/>
+
+    <!-- yeux -->
+    <ellipse cx="138" cy="170" rx="18" ry="21" fill="white"/>
+    <ellipse cx="182" cy="170" rx="18" ry="21" fill="white"/>
+
+    <g class="blink">
+      <ellipse cx="138" cy="170" rx="8" ry="11" fill="#5A3A00"/>
+      <ellipse cx="182" cy="170" rx="8" ry="11" fill="#5A3A00"/>
+    </g>
+
+    <!-- reflets yeux -->
+    <ellipse cx="141" cy="166" rx="3" ry="3.5" fill="white"/>
+    <ellipse cx="185" cy="166" rx="3" ry="3.5" fill="white"/>
+
+    <!-- joues -->
+    <ellipse cx="120" cy="192" rx="7" ry="4.5" fill="#FFB8B8" opacity=".45"/>
+    <ellipse cx="200" cy="192" rx="7" ry="4.5" fill="#FFB8B8" opacity=".45"/>
+
+    <!-- sourire doux -->
+    <path d="M152 195 Q160 202 168 195" stroke="#5A3A00" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- petites mains -->
+    <ellipse cx="120" cy="210" rx="9" ry="7" fill="#FFE08A"/>
+    <ellipse cx="200" cy="210" rx="9" ry="7" fill="#FFE08A"/>
+
+  </g>
+</svg>
