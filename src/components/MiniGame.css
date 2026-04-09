@@ -1,0 +1,115 @@
+.minigame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 16px;
+  width: 100%;
+}
+.minigame__instruction {
+  font-size: 15px;
+  color: rgba(225,218,248,.85);
+  text-align: center;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.minigame__cta {
+  background: var(--accent);
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  color: #1a1535;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s;
+  letter-spacing: .02em;
+  margin-top: 8px;
+}
+.minigame__cta:hover { transform: scale(1.04); }
+
+/* HeartBeat */
+.heartbeat__meter { width:100%; height:12px; background:rgba(255,255,255,.08); border-radius:6px; overflow:hidden; position:relative; margin-bottom:8px; }
+.heartbeat__bar { height:100%; border-radius:6px; transition:width .3s ease; }
+.heartbeat__bpm { font-size:12px; font-weight:700; text-align:center; margin-bottom:4px; }
+.heartbeat__button { width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.06); border:2px solid var(--color); cursor:pointer; display:flex; align-items:center; justify-content:center; position:relative; transition:transform .1s; }
+.heartbeat__button:active { transform:scale(0.95); }
+.heartbeat__heart { font-size:52px; display:block; transition:transform .1s, color .3s; }
+.heartbeat__ripple { position:absolute; inset:0; border-radius:50%; border:2px solid; animation:hbRipple .6s ease-out forwards; }
+@keyframes hbRipple { from{transform:scale(1);opacity:1} to{transform:scale(2);opacity:0} }
+.heartbeat__hint { font-size:12px; color:rgba(255,255,255,.3); text-align:center; }
+
+/* FireBreath */
+.firebreath__flames { display:flex; gap:16px; font-size:40px; }
+.firebreath__flame { transition:all .4s ease; animation:flicker 1s ease-in-out infinite alternate; }
+.firebreath__flame--out { opacity:0.3; filter:grayscale(1); animation:none; }
+.firebreath__flame--blowing { transform:translateX(20px) scaleX(0.3); opacity:0; }
+@keyframes flicker { from{transform:scale(1) rotate(-3deg)} to{transform:scale(1.1) rotate(3deg)} }
+.firebreath__blow-btn { background:rgba(255,255,255,.06); border:1.5px solid var(--color); border-radius:50px; padding:14px 28px; color:var(--color); font-size:15px; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
+.firebreath__blow-btn:hover { background:rgba(255,255,255,.1); }
+.firebreath__blow-btn:disabled { opacity:.5; }
+
+/* TearJar */
+.tearjar__field { position:relative; width:100%; height:200px; background:rgba(255,255,255,.03); border-radius:20px; overflow:hidden; }
+.tearjar__tear { position:absolute; top:0; font-size:28px; background:none; border:none; cursor:pointer; animation:tearFall 2.2s ease-in forwards; }
+@keyframes tearFall { from{top:-10%;opacity:1} to{top:85%;opacity:0.3} }
+.tearjar__jar { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); width:60px; height:70px; border:2px solid; border-radius:8px 8px 14px 14px; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; }
+.tearjar__fill { width:100%; transition:height .5s ease; }
+.tearjar__jar-label { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:32px; }
+
+/* StarCatcher */
+.starcatcher__field { position:relative; width:100%; height:200px; background:rgba(255,255,255,.03); border-radius:20px; overflow:hidden; }
+.starcatcher__item { position:absolute; top:0; font-size:32px; background:none; border:none; cursor:pointer; animation:starFall 2.2s linear forwards; }
+@keyframes starFall { from{top:0;opacity:1} to{top:90%;opacity:.2} }
+.starcatcher__score { display:flex; gap:24px; font-size:16px; font-weight:700; }
+
+/* MirrorLight */
+.mirrorlight__scene { position:relative; width:100%; height:160px; display:flex; align-items:center; justify-content:space-around; }
+.mirrorlight__prism { font-size:52px; transition:transform .2s; }
+.mirrorlight__ray { position:absolute; width:60%; height:4px; left:20%; top:50%; transition:opacity .3s, transform .2s; }
+.mirrorlight__mirror { font-size:48px; transition:all .4s; }
+.mirrorlight__slider { width:90%; accent-color:var(--color); cursor:pointer; }
+.mirrorlight__gauge { width:90%; height:10px; background:rgba(255,255,255,.08); border-radius:5px; overflow:hidden; }
+.mirrorlight__gauge-fill { height:100%; border-radius:5px; transition:width .3s; }
+
+/* HeartWarm */
+.heartwarm__zone { width:100%; height:180px; display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:20px; background:rgba(255,255,255,.03); user-select:none; }
+.heartwarm__gauge { width:90%; height:10px; background:rgba(255,255,255,.08); border-radius:5px; overflow:hidden; }
+.heartwarm__gauge-fill { height:100%; border-radius:5px; transition:width .2s; }
+.heartwarm__hint { font-size:13px; color:rgba(255,255,255,.4); }
+
+/* FriendBridge */
+.friendbridge__bridge { width:100%; border:2px solid; border-radius:20px; padding:16px; display:flex; align-items:center; gap:12px; min-height:70px; }
+.friendbridge__person { font-size:28px; flex-shrink:0; }
+.friendbridge__planks { flex:1; display:flex; flex-wrap:wrap; gap:6px; }
+.friendbridge__plank { padding:4px 10px; border-radius:20px; border:1px solid; font-size:12px; font-weight:700; }
+.friendbridge__words { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.friendbridge__word { background:rgba(255,255,255,.06); border:1px solid var(--color); color:var(--color); border-radius:20px; padding:8px 16px; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
+.friendbridge__word:hover { background:rgba(255,255,255,.12); }
+
+/* WorryJar / VictoryJar */
+.worryjar__jar, .victoryjar__jar { width:100px; height:120px; border:2px solid; border-radius:10px 10px 20px 20px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; }
+.worryjar__fill, .victoryjar__fill { position:absolute; bottom:0; left:0; right:0; transition:height .5s ease; }
+.worryjar__contents { position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; gap:2px; padding:4px; }
+.worryjar__item { font-size:9px; text-align:center; color:rgba(255,255,255,.7); }
+.worryjar__lid { position:absolute; top:4px; font-size:20px; }
+.worryjar__worries, .victoryjar__list { display:flex; flex-direction:column; gap:8px; width:100%; }
+.worryjar__worry, .victoryjar__item { background:rgba(255,255,255,.06); border:1px solid var(--color); color:rgba(225,218,248,.8); border-radius:12px; padding:10px 16px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; transition:all .2s; font-family:inherit; }
+.worryjar__worry:hover, .victoryjar__item:hover { background:rgba(255,255,255,.1); }
+.victoryjar__star { animation:float 2s ease-in-out infinite; }
+
+/* CourageShield */
+.courageshield__shield { width:140px; height:140px; border:3px solid; border-radius:50% 50% 40% 40%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:rgba(255,255,255,.04); }
+.courageshield__emblem { font-size:36px; }
+.courageshield__words-placed { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.courageshield__placed-word { font-size:10px; font-weight:700; }
+.courageshield__words { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.courageshield__word { border:1px solid; border-radius:20px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
+.courageshield__word:hover:not(:disabled) { transform:scale(1.05); }
+
+/* ColorBreath */
+.colorbreath__sky { width:100%; height:120px; border-radius:20px; background:linear-gradient(180deg,#2a2060,#1a1535); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.colorbreath__blob { position:absolute; width:60px; height:60px; border-radius:50%; opacity:0.7; filter:blur(12px); animation:blobIn .6s ease both; }
+@keyframes blobIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:.7} }
+.colorbreath__base { font-size:48px; transition:opacity .5s; }
+.colorbreath__btn { border:2px solid; border-radius:50px; padding:14px 28px; font-size:15px; font-weight:700; cursor:pointer; transition:all .3s; font-family:inherit; }

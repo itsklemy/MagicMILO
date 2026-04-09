@@ -1,0 +1,19 @@
+{
+  "amora": {
+    "id": "amora",
+    "name": "Amora",
+    "isPremium": true,
+    "emotion": "amour",
+    "emotion_label": "L'Amour",
+    "subtitle": "Quand le cœur est trop plein",
+    "style": "Petit cœur lumineux rose corail palpitant",
+    "colors": {
+      "primary": "#ff6b8a",
+      "secondary": "#ffb3c6",
+      "background": "rgba(255,107,138,0.12)",
+      "text": "#5a0020"
+    },
+    "personality": "chaleureuse, douce, jamais mièvre",
+    "intro": "Je suis Amora. Je suis là pour tous les moments où ton cœur déborde."
+  }
+}

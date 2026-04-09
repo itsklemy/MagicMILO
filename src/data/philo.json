@@ -1,0 +1,19 @@
+{
+  "philo": {
+    "id": "philo",
+    "name": "Philo",
+    "isPremium": true,
+    "emotion": "amitié",
+    "emotion_label": "L'Amitié",
+    "subtitle": "Quand les liens font mal ou font du bien",
+    "style": "Petite étoile filante verte et espiègle",
+    "colors": {
+      "primary": "#4ecdc4",
+      "secondary": "#a8f0eb",
+      "background": "rgba(78,205,196,0.12)",
+      "text": "#00403d"
+    },
+    "personality": "espiègle, sincère, direct",
+    "intro": "Je suis Philo. Je suis là pour tout ce qui touche aux amis et aux liens."
+  }
+}
