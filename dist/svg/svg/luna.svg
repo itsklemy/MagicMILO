@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Halo doré -->
+  <circle cx="100" cy="100" r="85" fill="url(#lunaGlow)" opacity="0.35"/>
+
+  <!-- Corps principal — petite étoile arrondie -->
+  <ellipse cx="100" cy="106" rx="50" ry="52" fill="url(#lunaBody)"/>
+
+  <!-- Reflet intérieur -->
+  <ellipse cx="100" cy="102" rx="36" ry="34" fill="url(#lunaInner)" opacity="0.5"/>
+
+  <!-- Petit miroir sur la poitrine -->
+  <circle cx="100" cy="116" r="12" fill="url(#lunaMirror)"/>
+  <circle cx="100" cy="116" r="10" fill="#fff8d0" opacity="0.7"/>
+  <ellipse cx="97" cy="113" rx="3" ry="4" fill="white" opacity="0.5"/>
+
+  <!-- Branches d'étoile (rayons) -->
+  <path d="M100 50 L103 62 L100 56 L97 62Z" fill="#ffd166" opacity="0.9"/>
+  <path d="M150 100 L138 103 L144 100 L138 97Z" fill="#ffd166" opacity="0.8"/>
+  <path d="M50 100 L62 103 L56 100 L62 97Z" fill="#ffd166" opacity="0.8"/>
+  <path d="M130 70 L122 80 L126 74 L118 76Z" fill="#ffd166" opacity="0.7"/>
+  <path d="M70 70 L78 80 L74 74 L82 76Z" fill="#ffd166" opacity="0.7"/>
+  <path d="M130 130 L122 120 L126 126 L118 124Z" fill="#ffd166" opacity="0.6"/>
+  <path d="M70 130 L78 120 L74 126 L82 124Z" fill="#ffd166" opacity="0.6"/>
+
+  <!-- Yeux expressifs et lumineux -->
+  <circle cx="85"  cy="96" r="10" fill="#fff8e8"/>
+  <circle cx="115" cy="96" r="10" fill="#fff8e8"/>
+  <circle cx="86"  cy="97" r="6"  fill="#8a5a00"/>
+  <circle cx="116" cy="97" r="6"  fill="#8a5a00"/>
+  <!-- Reflet yeux -->
+  <circle cx="89"  cy="94" r="2.5" fill="white"/>
+  <circle cx="119" cy="94" r="2.5" fill="white"/>
+  <!-- Petit reflet doré dans les yeux -->
+  <circle cx="83"  cy="99" r="1.5" fill="#ffd166" opacity="0.6"/>
+  <circle cx="113" cy="99" r="1.5" fill="#ffd166" opacity="0.6"/>
+
+  <!-- Sourire chaleureux et encourageant -->
+  <path d="M87 110 Q100 122 113 110" stroke="#c08800" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Petites étoiles autour -->
+  <path d="M58 60 L60 55 L62 60 L67 62 L62 64 L60 69 L58 64 L53 62Z" fill="#ffd166" opacity="0.9"/>
+  <path d="M136 48 L138 44 L140 48 L144 50 L140 52 L138 56 L136 52 L132 50Z" fill="#fff0a0" opacity="0.8"/>
+  <circle cx="152" cy="70" r="3" fill="#ffd166" opacity="0.7"/>
+  <circle cx="48"  cy="75" r="2" fill="#fff0a0" opacity="0.6"/>
+  <circle cx="155" cy="130" r="2.5" fill="#ffd166" opacity="0.5"/>
+  <circle cx="45"  cy="130" r="2" fill="#fff0a0" opacity="0.6"/>
+
+  <!-- Petites étoiles scintillantes sur le corps -->
+  <path d="M80 120 L81.5 117 L83 120 L86 121 L83 122 L81.5 125 L80 122 L77 121Z" fill="#ffd166" opacity="0.5"/>
+  <path d="M117 108 L118.5 105 L120 108 L123 109 L120 110 L118.5 113 L117 110 L114 109Z" fill="#ffd166" opacity="0.4"/>
+
+  <defs>
+    <radialGradient id="lunaGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#f0c060" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lunaBody" cx="40%" cy="30%" r="70%">
+      <stop offset="0%"   stop-color="#fff8d0"/>
+      <stop offset="100%" stop-color="#f0c060"/>
+    </radialGradient>
+    <radialGradient id="lunaInner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="white"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lunaMirror" cx="40%" cy="30%" r="70%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ffd166"/>
+    </radialGradient>
+  </defs>
+</svg>

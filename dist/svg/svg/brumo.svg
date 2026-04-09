@@ -1,0 +1,107 @@
+<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="brumoGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#EDE8F7" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#C4B8E8" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="brumoBody" x1="110" y1="120" x2="210" y2="220">
+      <stop offset="0%" stop-color="#F6F2FF"/>
+      <stop offset="100%" stop-color="#C4B8E8"/>
+    </linearGradient>
+
+    <style>
+      .floaty {
+        animation: floaty 4.5s ease-in-out infinite;
+        transform-origin: 160px 170px;
+      }
+
+      .breath {
+        animation: breath 3.5s ease-in-out infinite;
+        transform-origin: 160px 180px;
+      }
+
+      .blink {
+        animation: blink 5.5s infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .shy {
+        animation: shy 6s ease-in-out infinite;
+      }
+
+      @keyframes floaty {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+
+      @keyframes breath {
+        0%,100% { transform: scale(1); }
+        50% { transform: scale(1.03,0.97); }
+      }
+
+      @keyframes blink {
+        0%,44%,48%,100% { transform: scaleY(1); }
+        46% { transform: scaleY(0.08); }
+      }
+
+      @keyframes shy {
+        0%,100% { transform: translateX(0); }
+        50% { transform: translateX(-2px); }
+      }
+    </style>
+  </defs>
+
+  <!-- glow doux -->
+  <ellipse cx="160" cy="170" rx="115" ry="95" fill="url(#brumoGlow)"/>
+
+  <g class="floaty shy">
+    <g class="breath">
+
+      <!-- ombre -->
+      <ellipse cx="160" cy="270" rx="60" ry="10" fill="#3D3560" opacity=".1"/>
+
+      <!-- nuage ultra arrondi -->
+      <path d="
+        M100 190
+        C75 190 65 165 85 150
+        C75 130 105 115 125 130
+        C130 100 180 100 185 130
+        C205 115 235 130 225 150
+        C245 165 235 190 210 190
+        C200 210 170 215 155 200
+        C140 215 110 210 100 190
+      " fill="url(#brumoBody)"/>
+
+      <!-- reflets -->
+      <ellipse cx="135" cy="150" rx="28" ry="18" fill="white" opacity=".35"/>
+      <ellipse cx="185" cy="170" rx="22" ry="14" fill="white" opacity=".25"/>
+
+      <!-- yeux -->
+      <ellipse cx="138" cy="158" rx="18" ry="20" fill="white"/>
+      <ellipse cx="182" cy="158" rx="18" ry="20" fill="white"/>
+
+      <g class="blink">
+        <ellipse cx="138" cy="158" rx="8" ry="11" fill="#3D3560"/>
+        <ellipse cx="182" cy="158" rx="8" ry="11" fill="#3D3560"/>
+      </g>
+
+      <!-- reflets yeux -->
+      <ellipse cx="141" cy="154" rx="3" ry="3.5" fill="white"/>
+      <ellipse cx="185" cy="154" rx="3" ry="3.5" fill="white"/>
+
+      <!-- joues -->
+      <ellipse cx="120" cy="178" rx="7" ry="4.5" fill="#FFB8B8" opacity=".5"/>
+      <ellipse cx="200" cy="178" rx="7" ry="4.5" fill="#FFB8B8" opacity=".5"/>
+
+      <!-- petite bouche rassurante -->
+      <path d="M150 180 Q160 187 170 180" stroke="#3D3560" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+      <!-- petites mains -->
+      <ellipse cx="115" cy="195" rx="9" ry="7" fill="#D8D1F2"/>
+      <ellipse cx="205" cy="195" rx="9" ry="7" fill="#D8D1F2"/>
+
+    </g>
+  </g>
+</svg>

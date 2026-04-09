@@ -5,6 +5,7 @@ const KEYS = {
   PREMIUM:        'magicmilo_premium',
   PREMIUM_EXPIRY: 'magicmilo_premium_expiry',
   CUSTOMER_ID:    'magicmilo_stripe_customer',
+  PENDING_PLAN:   'magicmilo_pending_plan',
 }
 
 export function useAuth() {
@@ -19,15 +20,35 @@ export function useAuth() {
       setUser(session?.user ?? null)
       _checkPremium()
       setIsLoading(false)
+
+      // Si l'utilisateur vient de se connecter et avait un plan en attente
+      const pendingPlan = localStorage.getItem(KEYS.PENDING_PLAN)
+      if (session?.user && pendingPlan) {
+        localStorage.removeItem(KEYS.PENDING_PLAN)
+        // Lance le paiement automatiquement
+        setTimeout(() => {
+          _launchStripe(session.user, pendingPlan)
+        }, 500)
+      }
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null)
         _checkPremium()
+
+        // Reprend le paiement après connexion OAuth
+        const pendingPlan = localStorage.getItem(KEYS.PENDING_PLAN)
+        if (session?.user && pendingPlan) {
+          localStorage.removeItem(KEYS.PENDING_PLAN)
+          setTimeout(() => {
+            _launchStripe(session.user, pendingPlan)
+          }, 500)
+        }
       }
     )
 
+    // Vérifie retour Stripe
     const params = new URLSearchParams(window.location.search)
     const sessionId = params.get('session_id')
     if (sessionId) {
@@ -42,14 +63,36 @@ export function useAuth() {
     const stored = localStorage.getItem(KEYS.PREMIUM)
     const expiry = localStorage.getItem(KEYS.PREMIUM_EXPIRY)
     if (stored === 'active') {
-      if (expiry && new Date(expiry) > new Date()) {
-        setIsPremium(true)
-      } else if (!expiry) {
+      if (!expiry || new Date(expiry) > new Date()) {
         setIsPremium(true)
       } else {
         setIsPremium(false)
         localStorage.removeItem(KEYS.PREMIUM)
       }
+    }
+  }
+
+  async function _launchStripe(currentUser, plan) {
+    try {
+      const priceId = plan === 'yearly'
+        ? import.meta.env.VITE_STRIPE_PRICE_YEARLY
+        : import.meta.env.VITE_STRIPE_PRICE_MONTHLY
+
+      const res = await fetch('/.netlify/functions/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId,
+          plan,
+          userId:    currentUser?.id    || 'anonymous',
+          userEmail: currentUser?.email || null,
+        })
+      })
+
+      const { url } = await res.json()
+      window.location.href = url
+    } catch (err) {
+      console.error('Erreur paiement:', err)
     }
   }
 
@@ -68,7 +111,9 @@ export function useAuth() {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: window.location.origin }
+        options: {
+          redirectTo: window.location.origin,
+        }
       })
       if (error) throw error
       return { success: true }
@@ -84,7 +129,9 @@ export function useAuth() {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'apple',
-        options: { redirectTo: window.location.origin }
+        options: {
+          redirectTo: window.location.origin,
+        }
       })
       if (error) throw error
       return { success: true }
@@ -98,23 +145,15 @@ export function useAuth() {
   const startPremiumPurchase = useCallback(async (plan = 'monthly') => {
     setIsLoading(true)
     try {
-      const priceId = plan === 'yearly'
-        ? import.meta.env.VITE_STRIPE_PRICE_YEARLY
-        : import.meta.env.VITE_STRIPE_PRICE_MONTHLY
-
-      const res = await fetch('/.netlify/functions/create-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          priceId,
-          plan,
-          userId:    user?.id    || 'anonymous',
-          userEmail: user?.email || null,
-        })
-      })
-
-      const { url } = await res.json()
-      window.location.href = url
+      // Si pas connecté → sauvegarde le plan et ouvre OAuth
+      if (!user) {
+        localStorage.setItem(KEYS.PENDING_PLAN, plan)
+        setShowAuthModal(true)
+        setIsLoading(false)
+        return
+      }
+      // Si connecté → lance Stripe directement
+      await _launchStripe(user, plan)
     } catch (err) {
       console.error('Erreur paiement:', err)
       setIsLoading(false)
@@ -161,6 +200,7 @@ export function useAuth() {
     localStorage.removeItem(KEYS.PREMIUM)
     localStorage.removeItem(KEYS.PREMIUM_EXPIRY)
     localStorage.removeItem(KEYS.CUSTOMER_ID)
+    localStorage.removeItem(KEYS.PENDING_PLAN)
   }, [])
 
   return {
