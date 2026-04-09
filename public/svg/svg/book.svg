@@ -1,0 +1,123 @@
+<svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bookGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FFF4B8" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#C9A8FF" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#C9A8FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="coverMain" x1="110" y1="110" x2="310" y2="310">
+      <stop offset="0%" stop-color="#9B72F0"/>
+      <stop offset="100%" stop-color="#6B43C7"/>
+    </linearGradient>
+
+    <linearGradient id="spine" x1="118" y1="105" x2="150" y2="310">
+      <stop offset="0%" stop-color="#5B35B3"/>
+      <stop offset="100%" stop-color="#43228D"/>
+    </linearGradient>
+
+    <linearGradient id="pages" x1="145" y1="120" x2="300" y2="295">
+      <stop offset="0%" stop-color="#FFF9EC"/>
+      <stop offset="100%" stop-color="#F3E8D6"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1A1535" flood-opacity="0.18"/>
+    </filter>
+
+    <style>
+      .bounce {
+        animation: bounceBook 2.2s ease-in-out infinite;
+        transform-origin: 210px 230px;
+      }
+
+      .glow {
+        animation: glowPulse 2.8s ease-in-out infinite;
+        transform-origin: 210px 210px;
+      }
+
+      .spark1 { animation: twinkle 2.1s ease-in-out infinite; }
+      .spark2 { animation: twinkle 2.7s ease-in-out infinite .35s; }
+      .spark3 { animation: twinkle 2.4s ease-in-out infinite .7s; }
+      .spark4 { animation: twinkle 3s ease-in-out infinite .15s; }
+
+      @keyframes bounceBook {
+        0%, 100% { transform: translateY(0px) scale(1); }
+        25% { transform: translateY(-4px) scale(1.01); }
+        50% { transform: translateY(-10px) scale(1.02); }
+        75% { transform: translateY(-4px) scale(1.01); }
+      }
+
+      @keyframes glowPulse {
+        0%, 100% { opacity: .8; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.06); }
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.35; transform: scale(0.85); }
+        50% { opacity: 1; transform: scale(1.2); }
+      }
+
+      .title {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </defs>
+
+  <ellipse class="glow" cx="210" cy="205" rx="150" ry="120" fill="url(#bookGlow)"/>
+
+  <g class="bounce" filter="url(#shadow)">
+    <ellipse cx="210" cy="334" rx="98" ry="18" fill="#1A1535" opacity="0.12"/>
+
+    <!-- livre -->
+    <g>
+      <!-- pages derrière -->
+      <path d="M145 105H293C304 105 313 114 313 125V287C313 298 304 307 293 307H145C134 307 125 298 125 287V125C125 114 134 105 145 105Z"
+            fill="url(#pages)"/>
+
+      <!-- tranche -->
+      <path d="M118 112C118 103 125 96 134 96H154V314H134C125 314 118 307 118 298V112Z"
+            fill="url(#spine)"/>
+
+      <!-- couverture -->
+      <path d="M136 96H290C303 96 314 107 314 120V290C314 303 303 314 290 314H136V96Z"
+            fill="url(#coverMain)"/>
+
+      <!-- bord intérieur -->
+      <path d="M152 114H280C289 114 296 121 296 130V280C296 289 289 296 280 296H152V114Z"
+            fill="none" stroke="#DCCBFF" stroke-opacity="0.35" stroke-width="3"/>
+
+      <!-- fermoir / déco -->
+      <circle cx="224" cy="155" r="18" fill="#FFD166"/>
+      <path d="M224 139L228 149L239 153L228 157L224 168L220 157L209 153L220 149Z" fill="#FFF6C9"/>
+
+      <!-- titre -->
+      <text x="224" y="210" text-anchor="middle" font-size="22" fill="#FFF9EC" class="title">
+        Le Grimoire
+      </text>
+      <text x="224" y="238" text-anchor="middle" font-size="22" fill="#FFF9EC" class="title">
+        de Milo
+      </text>
+
+      <!-- petites lignes décoratives -->
+      <path d="M182 258C198 252 250 252 266 258" stroke="#FFD166" stroke-width="4" stroke-linecap="round"/>
+      <path d="M192 274C205 270 243 270 256 274" stroke="#FFD166" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <!-- étincelles -->
+    <g class="spark1">
+      <path d="M104 122L107 129L114 132L107 135L104 142L101 135L94 132L101 129L104 122Z" fill="#FFE27A"/>
+    </g>
+    <g class="spark2">
+      <path d="M336 136L339 143L346 146L339 149L336 156L333 149L326 146L333 143L336 136Z" fill="#FFE27A"/>
+    </g>
+    <g class="spark3">
+      <path d="M142 320L144.8 326L151 329L144.8 332L142 338L139.2 332L133 329L139.2 326L142 320Z" fill="#FFF2B8"/>
+    </g>
+    <g class="spark4">
+      <path d="M300 318L302.8 324L309 327L302.8 330L300 336L297.2 330L291 327L297.2 324L300 318Z" fill="#FFF2B8"/>
+    </g>
+  </g>
+</svg>

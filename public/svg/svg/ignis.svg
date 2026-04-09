@@ -1,0 +1,94 @@
+<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ignisGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FFE5B4" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FF8B6A" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="ignisBody" x1="120" y1="90" x2="210" y2="240">
+      <stop offset="0%" stop-color="#FFD166"/>
+      <stop offset="100%" stop-color="#FF8B6A"/>
+    </linearGradient>
+
+    <style>
+      .floaty {
+        animation: floaty 3.5s ease-in-out infinite;
+        transform-origin: 160px 170px;
+      }
+
+      .blink {
+        animation: blink 5s infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .pulse {
+        animation: pulse 2s ease-in-out infinite;
+        transform-origin: 160px 170px;
+      }
+
+      @keyframes floaty {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+
+      @keyframes blink {
+        0%,44%,48%,100% { transform: scaleY(1); }
+        46% { transform: scaleY(0.08); }
+      }
+
+      @keyframes pulse {
+        0%,100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+    </style>
+  </defs>
+
+  <!-- glow doux -->
+  <ellipse cx="160" cy="170" rx="110" ry="95" fill="url(#ignisGlow)"/>
+
+  <g class="floaty pulse">
+
+    <!-- ombre -->
+    <ellipse cx="160" cy="270" rx="55" ry="10" fill="#7A3020" opacity=".1"/>
+
+    <!-- forme flamme ultra arrondie -->
+    <path d="
+      M160 90
+      C180 110 190 130 185 150
+      C205 150 215 170 205 190
+      C195 210 180 225 160 235
+      C140 225 125 210 115 190
+      C105 170 115 150 135 150
+      C130 130 140 110 160 90
+    " fill="url(#ignisBody)"/>
+
+    <!-- reflets -->
+    <ellipse cx="145" cy="150" rx="25" ry="18" fill="white" opacity=".25"/>
+
+    <!-- yeux -->
+    <ellipse cx="138" cy="158" rx="18" ry="20" fill="white"/>
+    <ellipse cx="182" cy="158" rx="18" ry="20" fill="white"/>
+
+    <g class="blink">
+      <ellipse cx="138" cy="158" rx="8" ry="11" fill="#7A3020"/>
+      <ellipse cx="182" cy="158" rx="8" ry="11" fill="#7A3020"/>
+    </g>
+
+    <!-- reflets yeux -->
+    <ellipse cx="141" cy="154" rx="3" ry="3.5" fill="white"/>
+    <ellipse cx="185" cy="154" rx="3" ry="3.5" fill="white"/>
+
+    <!-- joues -->
+    <ellipse cx="120" cy="178" rx="7" ry="4.5" fill="#FFB8B8" opacity=".5"/>
+    <ellipse cx="200" cy="178" rx="7" ry="4.5" fill="#FFB8B8" opacity=".5"/>
+
+    <!-- sourire doux -->
+    <path d="M150 178 Q160 186 170 178" stroke="#7A3020" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- petites mains -->
+    <ellipse cx="120" cy="200" rx="10" ry="7" fill="#FF9A7A"/>
+    <ellipse cx="200" cy="200" rx="10" ry="7" fill="#FF9A7A"/>
+
+  </g>
+</svg>

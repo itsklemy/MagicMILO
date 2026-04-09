@@ -72,7 +72,7 @@ export function EntityHeroCard({ entityId, name, intro, isPremium }) {
       <div className="entity-hero__avatar-wrap">
         <div className="entity-hero__glow" />
         <img
-          src={`/src/assets/svg/${entityId}.svg`}
+          src={`/svg/${entityId}.svg`}
           alt={name}
           className="entity-hero__avatar"
           draggable={false}
@@ -113,7 +113,7 @@ export function EntityCompanionBubble({ entityId, name, message, side = 'left' }
     >
       <div className="companion-bubble__avatar">
         <img
-          src={`/src/assets/svg/${entityId}.svg`}
+          src={`/svg/${entityId}.svg`}
           alt={name}
           draggable={false}
         />
@@ -157,7 +157,7 @@ export function EntityTransitionScene({ entityId, name, message, onDismiss }) {
       <div className="entity-transition__bg" />
       <div className="entity-transition__content">
         <img
-          src={`/src/assets/svg/${entityId}.svg`}
+          src={`/svg/${entityId}.svg`}
           alt={name}
           className="entity-transition__avatar"
           draggable={false}
@@ -238,7 +238,7 @@ export function PremiumEntityShowcase({ entities, onSelectEntity, onClose }) {
       {/* Milo présente */}
       <div className="premium-showcase__milo">
         <img
-          src="/src/assets/svg/milo.svg"
+          src="/svg/milo.svg"
           alt="Milo"
           className="premium-showcase__milo-avatar"
           draggable={false}
@@ -279,7 +279,7 @@ export function PremiumEntityShowcase({ entities, onSelectEntity, onClose }) {
               {/* En-tête de la carte */}
               <div className="premium-showcase__entity-header">
                 <img
-                  src={`/src/assets/svg/${entityId}.svg`}
+                  src={`/svg/${entityId}.svg`}
                   alt={entity.name}
                   className="premium-showcase__entity-avatar"
                   draggable={false}
@@ -351,7 +351,7 @@ export function CompanionFooterMessage({ entityId, name, message }) {
       style={{ '--ec': meta.color }}
     >
       <img
-        src={`/src/assets/svg/${entityId}.svg`}
+        src={`/svg/${entityId}.svg`}
         alt={name}
         className="footer-companion__avatar"
         draggable={false}
@@ -381,7 +381,7 @@ export function EntityEndCard({ entityId, name, endingMessage, formula, onNext }
       <div className="entity-end-card__avatar-wrap">
         <div className="entity-end-card__glow" />
         <img
-          src={`/src/assets/svg/${entityId}.svg`}
+          src={`/svg/${entityId}.svg`}
           alt={name}
           className="entity-end-card__avatar"
           draggable={false}
