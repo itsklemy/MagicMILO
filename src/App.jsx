@@ -13,6 +13,7 @@ import lunaData              from './data/luna.json';
 import SettingsScreen from './pages/SettingsScreen'
 import amoraData from './data/amora.json';
 import philoData from './data/philo.json';
+import { premiumRoutes } from './data/premiumRoutes';
 import PotionProgress, { PotionFloatingIcon } from './components/PotionProgress';
 import RouteSelectScreen from './pages/RouteSelectScreen';
 
