@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FloatingParticles from '../components/FloatingParticles';
 import FormulaScreen from '../pages/FormulaScreen';
-import { recordProgress } from '../components/PotionProgress';
 
 // Mini-jeux gratuits
 import MiniGameBreathCloud   from '../components/MiniGameBreathCloud';
