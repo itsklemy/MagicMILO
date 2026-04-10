@@ -1,113 +1,57 @@
 import React, { useState } from 'react';
 import './AuthPremiumModal.css';
 
-/**
- * AuthPremiumModal — Modal douce déclenchée uniquement quand l'enfant
- * veut accéder à un contenu premium. 3 étapes :
- * 1. Présentation du premium (pourquoi créer un compte)
- * 2. OAuth (Google / Apple)
- * 3. Paiement
- */
 export default function AuthPremiumModal({
-  isOpen,
-  onClose,
-  isConnected,
-  isLoading,
-  onGoogleLogin,
-  onAppleLogin,
-  onPurchase,
-  onRestore,
+  isOpen, onClose, isConnected, isLoading,
+  onGoogleLogin, onPurchase, onRestore,
 }) {
   const [step, setStep] = useState(isConnected ? 'payment' : 'intro');
 
   if (!isOpen) return null;
 
-const handleGoogleLogin = async () => {
-  // Sauvegarde le plan AVANT la redirection OAuth
-  localStorage.setItem('magicmilo_pending_plan', 'monthly')
-  await onGoogleLogin()
-  // La page va être redirigée vers Google — rien après ici
-}
+  const handleGoogleLogin = async () => {
+    localStorage.setItem('magicmilo_pending_plan', 'monthly');
+    await onGoogleLogin();
+  };
 
-
- const handlePurchase = async (plan = 'monthly') => {
-  localStorage.setItem('magicmilo_pending_plan', plan)
-  await onPurchase(plan)
-}
+  const handlePurchase = async (plan = 'monthly') => {
+    localStorage.setItem('magicmilo_pending_plan', plan);
+    await onPurchase(plan);
+  };
 
   return (
     <div className="auth-modal-overlay" onClick={onClose}>
       <div className="auth-modal" onClick={e => e.stopPropagation()}>
+        <button className="auth-modal__close" onClick={onClose}>×</button>
 
-        {/* Bouton fermeture */}
-        <button className="auth-modal__close" onClick={onClose} aria-label="Fermer">×</button>
-
-        {/* ── ÉTAPE 1 : Introduction premium ────────────────── */}
         {step === 'intro' && (
           <div className="auth-modal__content">
             <div className="auth-modal__hero">
-              <div className="auth-modal__stars">
-                <span>✦</span><span>✦</span><span>✦</span>
-              </div>
-              <h2 className="auth-modal__title">
-                Un monde plus grand t'attend
-              </h2>
+              <div className="auth-modal__stars"><span>✦</span><span>✦</span><span>✦</span></div>
+              <h2 className="auth-modal__title">Un monde plus grand t'attend</h2>
               <p className="auth-modal__subtitle">
-                Avec Magic Milo Premium, Milo et tous ses amis t'accompagnent
-                plus loin, plus longtemps, avec plus de magie.
+                Avec Magic Milo Premium, Milo et tous ses amis t'accompagnent plus loin, avec plus de magie.
               </p>
             </div>
-
             <ul className="auth-modal__features">
-              <li>
-                <span className="auth-modal__feature-icon">✨</span>
-                <span>25 parcours émotionnels approfondis</span>
-              </li>
-              <li>
-                <span className="auth-modal__feature-icon">🌟</span>
-                <span>Luna, la nouvelle amie de la confiance en soi</span>
-              </li>
-              <li>
-                <span className="auth-modal__feature-icon">💛</span>
-                <span>Plus de mini-jeux, plus de formules magiques</span>
-              </li>
-              <li>
-                <span className="auth-modal__feature-icon">🔒</span>
-                <span>Tes progrès sauvegardés, partout avec toi</span>
-              </li>
+              <li><span className="auth-modal__feature-icon">✨</span><span>40 parcours émotionnels approfondis</span></li>
+              <li><span className="auth-modal__feature-icon">🌟</span><span>Luna, Amora et Philo — entités exclusives</span></li>
+              <li><span className="auth-modal__feature-icon">💛</span><span>Mini-jeux interactifs et formules magiques</span></li>
+              <li><span className="auth-modal__feature-icon">🔒</span><span>Progression sauvegardée partout</span></li>
             </ul>
-
-            <p className="auth-modal__account-reason">
-              Un compte te permet de garder ta progression et d'accéder à tes
-              aventures sur tous tes appareils.
-            </p>
-
-            <button
-              className="auth-modal__cta"
-              onClick={() => setStep('oauth')}
-            >
+            <button className="auth-modal__cta" onClick={() => setStep('oauth')}>
               Créer mon compte ✦
             </button>
-
-            <button className="auth-modal__secondary" onClick={onClose}>
-              Pas maintenant
-            </button>
+            <button className="auth-modal__secondary" onClick={onClose}>Pas maintenant</button>
           </div>
         )}
 
-        {/* ── ÉTAPE 2 : OAuth ───────────────────────────────── */}
         {step === 'oauth' && (
           <div className="auth-modal__content">
             <div className="auth-modal__hero">
-              <div className="auth-modal__milo-small">
-                <MiloMini />
-              </div>
               <h2 className="auth-modal__title">Rejoins le monde de Milo</h2>
-              <p className="auth-modal__subtitle">
-                Choisis comment tu veux te connecter. C'est rapide et sécurisé.
-              </p>
+              <p className="auth-modal__subtitle">Connexion rapide et sécurisée.</p>
             </div>
-
             <div className="auth-modal__oauth-buttons">
               <button
                 className="auth-modal__oauth-btn auth-modal__oauth-btn--google"
@@ -117,94 +61,51 @@ const handleGoogleLogin = async () => {
                 <GoogleIcon />
                 {isLoading ? 'Connexion…' : 'Continuer avec Google'}
               </button>
-
-              <button
-                className="auth-modal__oauth-btn auth-modal__oauth-btn--apple"
-                onClick={handleAppleLogin}
-                disabled={isLoading}
-              >
-                <AppleIcon />
-                {isLoading ? 'Connexion…' : 'Continuer avec Apple'}
-              </button>
             </div>
-
             <p className="auth-modal__legal">
               En créant un compte, tu acceptes nos{' '}
               <a href="/cgu" target="_blank" rel="noopener">conditions d'utilisation</a>{' '}
               et notre{' '}
               <a href="/privacy" target="_blank" rel="noopener">politique de confidentialité</a>.
-              Aucune donnée de l'enfant n'est partagée.
             </p>
-
-            <button className="auth-modal__back" onClick={() => setStep('intro')}>
-              ← Retour
-            </button>
+            <button className="auth-modal__back" onClick={() => setStep('intro')}>← Retour</button>
           </div>
         )}
 
-        {/* ── ÉTAPE 3 : Paiement ────────────────────────────── */}
-{step === 'payment' && (
-  <div className="auth-modal__content">
-    <div className="auth-modal__hero">
-      <div className="auth-modal__premium-badge">PREMIUM</div>
-      <h2 className="auth-modal__title">Magic Milo Premium</h2>
-    </div>
-
-    <ul className="auth-modal__features">
-      <li><span className="auth-modal__feature-icon">✨</span><span>30 parcours émotionnels</span></li>
-      <li><span className="auth-modal__feature-icon">🌙</span><span>Toutes les entités débloquées</span></li>
-      <li><span className="auth-modal__feature-icon">💛</span><span>Nouveaux contenus chaque mois</span></li>
-      <li><span className="auth-modal__feature-icon">🔒</span><span>Progression sauvegardée</span></li>
-    </ul>
-
-    <button
-      className="auth-modal__cta auth-modal__cta--purchase"
-      onClick={() => handlePurchase('yearly')}
-      disabled={isLoading}
-    >
-      {isLoading ? 'Traitement…' : '39,99€ / an — Meilleure offre ✦'}
-    </button>
-
-    <button
-      className="auth-modal__cta-secondary-purchase"
-      onClick={() => handlePurchase('monthly')}
-      disabled={isLoading}
-    >
-      4,99€ / mois
-    </button>
-
-    <p className="auth-modal__legal">
-      Annulation à tout moment depuis les réglages.
-    </p>
-  </div>
-)}
-
+        {step === 'payment' && (
+          <div className="auth-modal__content">
+            <div className="auth-modal__hero">
+              <div className="auth-modal__premium-badge">PREMIUM</div>
+              <h2 className="auth-modal__title">Magic Milo Premium</h2>
+            </div>
+            <ul className="auth-modal__features">
+              <li><span className="auth-modal__feature-icon">✨</span><span>40 parcours émotionnels</span></li>
+              <li><span className="auth-modal__feature-icon">🌟</span><span>Luna, Amora et Philo débloquées</span></li>
+              <li><span className="auth-modal__feature-icon">💛</span><span>Mini-jeux et formules magiques</span></li>
+              <li><span className="auth-modal__feature-icon">🔒</span><span>Progression sauvegardée</span></li>
+            </ul>
+            <button
+              className="auth-modal__cta auth-modal__cta--purchase"
+              onClick={() => handlePurchase('yearly')}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Traitement…' : '39,99€ / an — Meilleure offre ✦'}
+            </button>
+            <button
+              className="auth-modal__cta-secondary-purchase"
+              onClick={() => handlePurchase('monthly')}
+              disabled={isLoading}
+            >
+              4,99€ / mois
+            </button>
+            <button className="auth-modal__secondary" onClick={onRestore} disabled={isLoading}>
+              Restaurer un achat existant
+            </button>
+            <p className="auth-modal__legal">Annulation à tout moment depuis les réglages.</p>
+          </div>
+        )}
       </div>
     </div>
-  );
-}
-
-// ── Mini SVG Milo ─────────────────────────────────────────────────────────────
-function MiloMini() {
-  return (
-    <svg width="60" height="60" viewBox="0 0 200 200" aria-hidden="true">
-      <defs>
-        <radialGradient id="mm" cx="40%" cy="30%" r="70%">
-          <stop offset="0%" stopColor="#e8e0f8"/>
-          <stop offset="100%" stopColor="#9b8ec4"/>
-        </radialGradient>
-      </defs>
-      <ellipse cx="100" cy="108" rx="52" ry="56" fill="url(#mm)"/>
-      <circle cx="84"  cy="98" r="10" fill="#f8f4ff"/>
-      <circle cx="116" cy="98" r="10" fill="#f8f4ff"/>
-      <circle cx="86"  cy="99" r="6"  fill="#4a3580"/>
-      <circle cx="118" cy="99" r="6"  fill="#4a3580"/>
-      <circle cx="89"  cy="96" r="2.5" fill="white"/>
-      <circle cx="121" cy="96" r="2.5" fill="white"/>
-      <path d="M88 114 Q100 124 112 114" stroke="#9b8ec4" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-      <ellipse cx="76"  cy="110" rx="8" ry="5" fill="#f2c4ce" opacity=".5"/>
-      <ellipse cx="124" cy="110" rx="8" ry="5" fill="#f2c4ce" opacity=".5"/>
-    </svg>
   );
 }
 
@@ -218,5 +119,3 @@ function GoogleIcon() {
     </svg>
   );
 }
-
-
