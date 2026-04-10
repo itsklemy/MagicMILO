@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FloatingParticles from '../components/FloatingParticles';
 import FormulaScreen from '../pages/FormulaScreen';
+import { recordProgress } from '../components/PotionProgress';
 
 // Mini-jeux gratuits
 import MiniGameBreathCloud   from '../components/MiniGameBreathCloud';
@@ -110,12 +111,12 @@ export default function ConversationScreen({ entityId, routeId, isPremium, onEnd
   const getStep = (id) => route?.steps?.find(s => s.id === id);
 
   const goNext = (nextId) => {
-    if (!nextId) {
-      // Fin du parcours
-      recordProgress(entityId);
-      onEnd();
-      return;
-    }
+  if (!nextId) {
+    recordProgress(entityId);
+    onEnd();
+    return;
+  }
+
     if (nextId === 'formula') {
       setShowFormula(true);
       return;
