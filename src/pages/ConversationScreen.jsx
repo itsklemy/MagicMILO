@@ -1,34 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useFlow } from '../hooks/useFlow';
-import ChatBubble from '../components/ChatBubble';
-import ChoiceButton from '../components/ChoiceButton';
-import ProgressDots from '../components/ProgressDots';
 import FloatingParticles from '../components/FloatingParticles';
 import FormulaScreen from '../pages/FormulaScreen';
-import FormulaCard from '../components/FormulaCard';
-import MoralCard from '../components/MoralCard';
-import MiniGameBreathCloud from '../components/MiniGameBreathCloud';
+
+// Mini-jeux gratuits
+import MiniGameBreathCloud   from '../components/MiniGameBreathCloud';
 import MiniGameMonsterShrink from '../components/MiniGameMonsterShrink';
-import MiniGameFireCalm from '../components/MiniGameFireCalm';
-import MiniGameRainRelease from '../components/MiniGameRainRelease';
-import MiniGameLightLinks from '../components/MiniGameLightLinks';
-import MiniGameHeartBeat from '../components/MiniGameHeartBeat';
-import MiniGameFireBreath from '../components/MiniGameFireBreath';
-import MiniGameTearJar from '../components/MiniGameTearJar';
-import MiniGameStarCatcher from '../components/MiniGameStarCatcher';
-import MiniGameMirrorLight from '../components/MiniGameMirrorLight';
-import MiniGameHeartWarm from '../components/MiniGameHeartWarm';
-import MiniGameFriendBridge from '../components/MiniGameFriendBridge';
-import MiniGameWorryJar from '../components/MiniGameWorryJar';
+import MiniGameFireCalm      from '../components/MiniGameFireCalm';
+import MiniGameRainRelease   from '../components/MiniGameRainRelease';
+import MiniGameLightLinks    from '../components/MiniGameLightLinks';
+
+// Mini-jeux premium
+import MiniGameHeartBeat     from '../components/MiniGameHeartBeat';
+import MiniGameFireBreath    from '../components/MiniGameFireBreath';
+import MiniGameTearJar       from '../components/MiniGameTearJar';
+import MiniGameStarCatcher   from '../components/MiniGameStarCatcher';
+import MiniGameMirrorLight   from '../components/MiniGameMirrorLight';
+import MiniGameHeartWarm     from '../components/MiniGameHeartWarm';
+import MiniGameFriendBridge  from '../components/MiniGameFriendBridge';
+import MiniGameWorryJar      from '../components/MiniGameWorryJar';
 import MiniGameCourageShield from '../components/MiniGameCourageShield';
-import MiniGameVictoryJar from '../components/MiniGameVictoryJar';
-import MiniGameColorBreath from '../components/MiniGameColorBreath';
-import formulasData from '../data/formulas.json';
+import MiniGameVictoryJar    from '../components/MiniGameVictoryJar';
+import MiniGameColorBreath   from '../components/MiniGameColorBreath';
+
 import entitiesData from '../data/entities.json';
-import lunaData from '../data/luna.json';
-import amoraData from '../data/amora.json';
-import philoData from '../data/philo.json';
+import lunaData     from '../data/luna.json';
+import amoraData    from '../data/amora.json';
+import philoData    from '../data/philo.json';
 import { premiumRoutes } from '../data/premiumRoutes';
+import { recordProgress } from '../components/PotionProgress';
+
 import './ConversationScreen.css';
 
 const ALL_ENTITIES = { ...entitiesData, ...lunaData, ...amoraData, ...philoData };
@@ -41,9 +41,10 @@ const flowModules = {
   soli:  () => import('../data/flows/soli.json'),
 };
 
-function MiniGameRenderer({ game, entityColor, entityId, onComplete }) {
+// ── Renderer mini-jeux ────────────────────────────────────────
+function MiniGameRenderer({ gameId, entityColor, entityId, onComplete }) {
   const p = { onComplete, entityColor };
-  switch (game) {
+  switch (gameId) {
     case 'BreathCloud':    return <MiniGameBreathCloud {...p}/>;
     case 'MonsterShrink':  return <MiniGameMonsterShrink {...p}/>;
     case 'FireCalm':       return <MiniGameFireCalm {...p}/>;
@@ -61,194 +62,225 @@ function MiniGameRenderer({ game, entityColor, entityId, onComplete }) {
     case 'VictoryJar':     return <MiniGameVictoryJar {...p}/>;
     case 'ColorBreath':    return <MiniGameColorBreath {...p}/>;
     default:
-      return <button onClick={onComplete} className="conversation__next-btn" style={{'--accent':entityColor}}>Continuer ✦</button>;
+      return (
+        <button className="conv__btn" style={{'--accent':entityColor}} onClick={onComplete}>
+          Continuer ✦
+        </button>
+      );
   }
 }
 
+// ── Composant principal ───────────────────────────────────────
 export default function ConversationScreen({ entityId, routeId, isPremium, onEnd }) {
-  const [flowData, setFlowData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [premiumStep, setPremiumStep] = useState(0);
+  const [loading,     setLoading]     = useState(true);
+  const [freeFlow,    setFreeFlow]    = useState(null);
+  const [history,     setHistory]     = useState([]);  // étapes visitées
+  const [current,     setCurrent]     = useState(null); // étape courante
   const [showFormula, setShowFormula] = useState(false);
-  const [showHero, setShowHero] = useState(true);
+  const [showHero,    setShowHero]    = useState(true);
+  const [chosenLabel, setChosenLabel] = useState(null); // réponse sélectionnée
   const bottomRef = useRef(null);
 
-  const entity = ALL_ENTITIES[entityId];
+  const entity      = ALL_ENTITIES[entityId];
   const entityColor = entity?.colors?.primary || '#9b8ec4';
-  const isPremiumEntity = entity?.isPremium;
+  const routes      = premiumRoutes[entityId] || [];
+  const route       = routeId ? routes.find(r => r.id === routeId) : routes[0];
+  const isPremiumFlow = isPremium && route;
 
-  const routes = premiumRoutes[entityId] || [];
-  const premiumRoute = routeId ? routes.find(r => r.id === routeId) : routes[0];
-  const isUsingPremiumFlow = isPremium && premiumRoute;
+  // ── Charge flow gratuit ───────────────────────────────────
+  useEffect(() => {
+    if (isPremiumFlow) { setLoading(false); return; }
+    const loader = flowModules[entityId];
+    if (loader) loader().then(mod => { setFreeFlow(mod.default || mod); setLoading(false); });
+    else setLoading(false);
+  }, [entityId, isPremiumFlow]);
+
+  // ── Init parcours premium ─────────────────────────────────
+  useEffect(() => {
+    if (!isPremiumFlow || !route) return;
+    const first = route.steps?.find(s => s.id === 'start') || route.steps?.[0];
+    if (first) setCurrent(first);
+  }, [isPremiumFlow, route]);
 
   useEffect(() => {
-    if (isUsingPremiumFlow) { setLoading(false); return; }
-    setLoading(true);
-    const loader = flowModules[entityId];
-    if (loader) loader().then(mod => { setFlowData(mod.default || mod); setLoading(false); });
-  }, [entityId, isUsingPremiumFlow]);
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [current, showFormula, history]);
 
-  const { currentNode, advance, choose, goBack, canGoBack, stepIndex, estimatedTotal } = useFlow(isUsingPremiumFlow ? null : flowData);
+  // ── Navigation dans le parcours premium ──────────────────
+  const getStep = (id) => route?.steps?.find(s => s.id === id);
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [currentNode, premiumStep, showFormula]);
-
-  if (loading) return <div className="conversation-screen conversation-screen--loading"><div className="loading-orb" style={{'--accent':entityColor}}/></div>;
-
-  // ── FLOW PREMIUM ────────────────────────────────────────────
-  if (isUsingPremiumFlow && premiumRoute) {
-    const steps = premiumRoute.steps || [];
-    const totalSteps = steps.length;
-    const currentStep = steps[premiumStep];
-    const isLastStep = premiumStep >= totalSteps - 1;
-
-    if (showFormula) {
-      return (
-        <FormulaScreen
-          formula={premiumRoute.magicFormula}
-          entityColor={entityColor}
-          entityId={entityId}
-          onNext={() => {
-            setShowFormula(false);
-            if (isLastStep) { onEnd(); } else { setPremiumStep(p => p + 1); }
-          }}
-        />
-      );
+  const goNext = (nextId) => {
+    if (!nextId) {
+      // Fin du parcours
+      recordProgress(entityId);
+      onEnd();
+      return;
     }
-
-    const handleNext = () => {
-      if (currentStep?.type === 'formula') { setShowFormula(true); return; }
-      if (isLastStep) { onEnd(); } else { setPremiumStep(p => p + 1); }
-    };
-
-    // Écran héro
-    if (showHero) {
-      return (
-        <div className="conversation-screen conversation-screen--premium" style={{'--entity-color':entityColor}}>
-          <FloatingParticles color={entityColor} count={10}/>
-          <header className="conversation__header">
-            <button className="conversation__back" onClick={onEnd}>← Quitter</button>
-            <div className="conversation__entity-badge">
-              <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="conversation__entity-avatar"/>
-              <span className="conversation__entity-name">{entity?.name}</span>
-            </div>
-            <div/>
-          </header>
-          <div className="conversation__body">
-            <div className="premium-hero">
-              <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="premium-hero__entity"/>
-              <div className="premium-hero__badge" style={{color:entityColor}}>✦ Parcours Premium</div>
-              <h2 className="premium-hero__title" style={{color:entityColor}}>{premiumRoute.title}</h2>
-              <p className="premium-hero__subtitle">{premiumRoute.subtitle}</p>
-              <div className="premium-hero__info" style={{borderColor:`${entityColor}30`,background:`${entityColor}10`}}>
-                ✦ {totalSteps} étapes · Formule magique · Accompagnement
-              </div>
-              <button className="conversation__next-btn" style={{'--accent':entityColor}} onClick={() => setShowHero(false)}>
-                Commencer ✦
-              </button>
-            </div>
-            <div ref={bottomRef}/>
-          </div>
-        </div>
-      );
+    if (nextId === 'formula') {
+      setShowFormula(true);
+      return;
     }
+    const next = getStep(nextId);
+    if (next) {
+      setHistory(h => [...h, current]);
+      setCurrent(next);
+      setChosenLabel(null);
+    } else {
+      recordProgress(entityId);
+      onEnd();
+    }
+  };
 
+  const goBack = () => {
+    if (history.length === 0) return;
+    const prev = history[history.length - 1];
+    setHistory(h => h.slice(0, -1));
+    setCurrent(prev);
+    setChosenLabel(null);
+  };
+
+  const handleChoice = (option) => {
+    setChosenLabel(option.label);
+    setTimeout(() => goNext(option.next), 400);
+  };
+
+  // ── Affiche formule plein écran ───────────────────────────
+  if (showFormula && route) {
     return (
-      <div className="conversation-screen conversation-screen--premium" style={{'--entity-color':entityColor}}>
-        <FloatingParticles color={entityColor} count={8}/>
+      <FormulaScreen
+        formula={route.magicFormula}
+        entityColor={entityColor}
+        entityId={entityId}
+        onNext={() => {
+          setShowFormula(false);
+          recordProgress(entityId);
+          onEnd();
+        }}
+      />
+    );
+  }
 
-        {/* Entité visible sur le côté */}
-        <div className="premium-entity-side" style={{opacity:.15}}>
-          <img src={`/svg/${entityId}.svg`} alt="" aria-hidden="true" style={{width:'100%',height:'100%',objectFit:'contain',filter:`drop-shadow(0 0 40px ${entityColor})`}}/>
-        </div>
+  if (loading) return <LoadingScreen entityColor={entityColor} />;
 
-        <header className="conversation__header conversation__header--premium">
-          <button className="conversation__back" onClick={premiumStep > 0 ? () => setPremiumStep(p => p-1) : onEnd}>
-            ← {premiumStep > 0 ? 'Retour' : 'Quitter'}
-          </button>
-          <div className="conversation__entity-badge">
-            <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="conversation__entity-avatar"/>
-            <span className="conversation__entity-name">{entity?.name}</span>
-          </div>
-          <ProgressDots total={totalSteps} current={premiumStep} color={entityColor}/>
+  // ── FLOW GRATUIT ──────────────────────────────────────────
+  if (!isPremiumFlow) {
+    return (
+      <FreeConversation
+        entityId={entityId}
+        entity={entity}
+        entityColor={entityColor}
+        flowData={freeFlow}
+        onEnd={onEnd}
+      />
+    );
+  }
+
+  // ── Écran héro ────────────────────────────────────────────
+  if (showHero) {
+    return (
+      <div className="conv-screen conv-screen--premium" style={{'--ec': entityColor}}>
+        <FloatingParticles color={entityColor} count={10}/>
+        <header className="conv__header">
+          <button className="conv__back" onClick={onEnd}>← Quitter</button>
+          <EntityBadge entity={entity} entityId={entityId} entityColor={entityColor}/>
+          <div style={{width:60}}/>
         </header>
-
-        <div className="conversation__body">
-          <PremiumStepRenderer
-            step={currentStep}
-            entityId={entityId}
-            entity={entity}
-            entityColor={entityColor}
-            isLast={isLastStep}
-            route={premiumRoute}
-            onNext={handleNext}
-          />
+        <div className="conv__body">
+          <div className="conv-hero">
+            <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="conv-hero__img" style={{filter:`drop-shadow(0 0 28px ${entityColor})`}}/>
+            <div className="conv-hero__badge" style={{color:entityColor}}>✦ Parcours Premium</div>
+            <h2 className="conv-hero__title" style={{color:entityColor}}>{route?.title}</h2>
+            <p className="conv-hero__subtitle">{route?.subtitle}</p>
+            <div className="conv-hero__info" style={{borderColor:`${entityColor}30`,background:`${entityColor}10`}}>
+              ✦ 8 étapes · Accompagnement personnalisé · Formule magique
+            </div>
+            <button className="conv__cta" style={{'--accent':entityColor}} onClick={()=>setShowHero(false)}>
+              Commencer ✦
+            </button>
+          </div>
           <div ref={bottomRef}/>
         </div>
       </div>
     );
   }
 
-  // ── FLOW GRATUIT ─────────────────────────────────────────────
-  if (!currentNode) return <div className="conversation-screen conversation-screen--loading"><div className="loading-orb" style={{'--accent':entityColor}}/></div>;
-
-  const formulas = formulasData[entityId] || [];
-  const formula = formulas[stepIndex % formulas.length] || formulas[0];
+  // ── FLOW PREMIUM ──────────────────────────────────────────
+  if (!current) return <LoadingScreen entityColor={entityColor}/>;
 
   return (
-    <div className="conversation-screen" style={{'--entity-color':entityColor}}>
-      <FloatingParticles color={entityColor} count={8}/>
-      <header className="conversation__header">
-        <button className="conversation__back" onClick={canGoBack ? goBack : onEnd}>← {canGoBack?'Retour':'Quitter'}</button>
-        <div className="conversation__entity-badge">
-          <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="conversation__entity-avatar"/>
-          <span className="conversation__entity-name">{entity?.name}</span>
-        </div>
-        <ProgressDots total={estimatedTotal} current={Math.min(stepIndex,estimatedTotal-1)} color={entityColor}/>
+    <div className="conv-screen conv-screen--premium" style={{'--ec': entityColor}}>
+      <FloatingParticles color={entityColor} count={6}/>
+
+      {/* Entité fantôme sur le côté */}
+      <div className="conv__entity-ghost">
+        <img src={`/svg/${entityId}.svg`} alt="" aria-hidden="true"
+          style={{width:'100%',height:'100%',objectFit:'contain',filter:`drop-shadow(0 0 40px ${entityColor})`}}/>
+      </div>
+
+      <header className="conv__header">
+        <button className="conv__back" onClick={history.length > 0 ? goBack : onEnd}>
+          ← {history.length > 0 ? 'Retour' : 'Quitter'}
+        </button>
+        <EntityBadge entity={entity} entityId={entityId} entityColor={entityColor}/>
+        <div style={{width:60}}/>
       </header>
-      <div className="conversation__body">
-        <NodeRenderer node={currentNode} entity={entity} entityColor={entityColor} entityId={entityId} formula={formula} onAdvance={advance} onChoose={choose} onEnd={onEnd}/>
+
+      <div className="conv__body">
+        <StepRenderer
+          step={current}
+          entity={entity}
+          entityId={entityId}
+          entityColor={entityColor}
+          chosenLabel={chosenLabel}
+          onNext={goNext}
+          onChoice={handleChoice}
+        />
         <div ref={bottomRef}/>
       </div>
     </div>
   );
 }
 
-function PremiumStepRenderer({ step, entityId, entity, entityColor, isLast, route, onNext }) {
+// ── Renderer d'une étape ──────────────────────────────────────
+function StepRenderer({ step, entity, entityId, entityColor, chosenLabel, onNext, onChoice }) {
   if (!step) return null;
+
   switch (step.type) {
+
     case 'entity-intro':
       return (
-        <div className="node-message">
-          <div className="premium-entity-intro" style={{borderColor:`${entityColor}30`,background:`${entityColor}08`}}>
-            <img src={`/svg/${entityId}.svg`} alt={entity?.name} style={{width:56,height:56,objectFit:'contain',filter:`drop-shadow(0 0 16px ${entityColor}80)`,animation:'float 4s ease-in-out infinite'}}/>
-            <div className="premium-entity-intro__bubble" style={{borderColor:`${entityColor}40`,background:`${entityColor}10`}}>
-              <p style={{color:'rgba(225,218,248,.9)',fontSize:16,lineHeight:1.65,fontStyle:'italic'}}>{step.content}</p>
-            </div>
-          </div>
-          <button className="conversation__next-btn" style={{'--accent':entityColor}} onClick={onNext}>{isLast?'Terminer ✦':'Je t\'écoute →'}</button>
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={step.content}/>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onNext(step.next)}>
+            Je t'écoute →
+          </button>
         </div>
       );
 
     case 'entity-bubble':
       return (
-        <div className="node-message">
-          <div className="premium-bubble" style={{borderColor:`${entityColor}30`,background:`${entityColor}08`}}>
-            <img src={`/svg/${entityId}.svg`} alt="" style={{width:40,height:40,objectFit:'contain',flexShrink:0,filter:`drop-shadow(0 0 10px ${entityColor}60)`}}/>
-            <p style={{color:'rgba(225,218,248,.85)',fontSize:15,lineHeight:1.65,fontStyle:'italic'}}>{step.content}</p>
-          </div>
-          <button className="conversation__next-btn" style={{'--accent':entityColor,marginTop:20}} onClick={onNext}>{isLast?'Terminer ✦':'Continuer →'}</button>
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={step.content}/>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onNext(step.next)}>
+            {step.btnLabel || 'Continuer →'}
+          </button>
         </div>
       );
 
     case 'question':
       return (
-        <div className="node-question">
-          <ChatBubble text={step.content} speaker="entity" entityColor={entityColor}/>
-          <div className="node-choices">
-            {(step.options||[]).map((opt,i) => (
-              <button key={i} className="premium-choice" style={{'--color':entityColor}} onClick={onNext}>
-                <span className="premium-choice__star" style={{color:entityColor}}>✦</span>
-                <span>{opt}</span>
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={step.content}/>
+          <div className="conv-choices">
+            {step.options.map((opt, i) => (
+              <button
+                key={i}
+                className={`conv-choice ${chosenLabel===opt.label ? 'conv-choice--chosen' : ''}`}
+                style={{'--color': entityColor}}
+                onClick={() => onChoice(opt)}
+              >
+                <span className="conv-choice__star" style={{color:entityColor}}>✦</span>
+                <span>{opt.label}</span>
               </button>
             ))}
           </div>
@@ -257,67 +289,197 @@ function PremiumStepRenderer({ step, entityId, entity, entityColor, isLast, rout
 
     case 'interaction':
       return (
-        <div className="node-minigame">
-          <div className="premium-bubble" style={{borderColor:`${entityColor}30`,background:`${entityColor}08`}}>
-            <img src={`/svg/${entityId}.svg`} alt="" style={{width:36,height:36,objectFit:'contain',flexShrink:0}}/>
-            <p style={{color:'rgba(225,218,248,.85)',fontSize:14,lineHeight:1.6}}>{step.content}</p>
-          </div>
-          <MiniGameRenderer game={step.gameId} entityColor={entityColor} entityId={entityId} onComplete={onNext}/>
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={step.content}/>
+          <MiniGameRenderer
+            gameId={step.gameId}
+            entityColor={entityColor}
+            entityId={entityId}
+            onComplete={() => onNext(step.next)}
+          />
         </div>
       );
 
-    case 'formula':
+    case 'adult-alert':
       return (
-        <div className="node-message">
-          <div style={{background:`${entityColor}12`,border:`1.5px solid ${entityColor}35`,borderRadius:24,padding:'20px',textAlign:'center',margin:'8px 0 24px'}}>
-            <p style={{color:entityColor,fontSize:11,fontWeight:700,textTransform:'uppercase',letterSpacing:'.1em',marginBottom:12}}>✦ Ta formule magique</p>
-            <p style={{color:'white',fontFamily:'var(--font-display)',fontSize:18,lineHeight:1.5,fontWeight:700}}>{step.content}</p>
+        <div className="conv-step">
+          <div className="conv-adult-alert" style={{borderColor:`${entityColor}50`,background:`${entityColor}10`}}>
+            <img src={`/svg/${entityId}.svg`} alt="" style={{width:52,height:52,objectFit:'contain'}}/>
+            <div>
+              <p className="conv-adult-alert__title" style={{color:entityColor}}>
+                {step.title || 'Parler à un adulte de confiance'}
+              </p>
+              <p className="conv-adult-alert__text">{step.content}</p>
+            </div>
           </div>
-          <button className="conversation__next-btn" style={{'--accent':entityColor}} onClick={onNext}>Je la répète ✦</button>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onNext(step.next)}>
+            {step.btnLabel || 'Je vais essayer →'}
+          </button>
         </div>
       );
 
     case 'action':
       return (
-        <div className="node-reframe">
-          <div className="node-reframe__badge" style={{borderColor:entityColor}}>
-            <span style={{color:entityColor}}>✦</span>
-            <p>{step.content}</p>
+        <div className="conv-step">
+          <div className="conv-action" style={{borderColor:`${entityColor}40`,background:`${entityColor}08`}}>
+            <p className="conv-action__label" style={{color:entityColor}}>✦ Pour ce soir</p>
+            <p className="conv-action__text">{step.content}</p>
           </div>
-          <button className="conversation__next-btn" style={{'--accent':entityColor,marginTop:20}} onClick={onNext}>{isLast?'Terminer le parcours ✦':'Je retiens ça →'}</button>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onNext(step.next)}>
+            {step.btnLabel || 'Je retiens ça ✦'}
+          </button>
+        </div>
+      );
+
+    case 'formula':
+      return (
+        <div className="conv-step">
+          <div className="conv-formula" style={{borderColor:`${entityColor}40`,background:`${entityColor}10`}}>
+            <p className="conv-formula__label" style={{color:entityColor}}>✦ Ta formule magique</p>
+            <p className="conv-formula__text">{step.content}</p>
+          </div>
+          <button className="conv__btn conv__btn--gold" style={{'--accent':entityColor}} onClick={()=>onNext(step.next)}>
+            Je la répète ✦
+          </button>
         </div>
       );
 
     default:
       return (
-        <div className="node-message">
-          <ChatBubble text={step.content||'...'} speaker="entity" entityColor={entityColor}/>
-          <button className="conversation__next-btn" style={{'--accent':entityColor}} onClick={onNext}>{isLast?'Terminer ✦':'Continuer →'}</button>
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={step.content||'...'}/>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onNext(step.next)}>
+            Continuer →
+          </button>
         </div>
       );
   }
 }
 
-function NodeRenderer({ node, entity, entityColor, entityId, formula, onAdvance, onChoose, onEnd }) {
+// ── Sous-composants ───────────────────────────────────────────
+function EntitySpeech({ entityId, entity, entityColor, text }) {
+  return (
+    <div className="conv-speech">
+      <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="conv-speech__avatar"
+        style={{filter:`drop-shadow(0 0 14px ${entityColor}80)`}}/>
+      <div className="conv-speech__bubble" style={{borderColor:`${entityColor}35`,background:`${entityColor}10`}}>
+        <p className="conv-speech__text">{text}</p>
+      </div>
+    </div>
+  );
+}
+
+function EntityBadge({ entity, entityId, entityColor }) {
+  return (
+    <div className="conv-badge">
+      <img src={`/svg/${entityId}.svg`} alt={entity?.name} className="conv-badge__img"/>
+      <span className="conv-badge__name" style={{color:entityColor}}>{entity?.name}</span>
+    </div>
+  );
+}
+
+function LoadingScreen({ entityColor }) {
+  return (
+    <div className="conv-screen conv-screen--loading">
+      <div className="loading-orb" style={{'--accent':entityColor}}/>
+    </div>
+  );
+}
+
+// ── Flow gratuit simplifié ────────────────────────────────────
+function FreeConversation({ entityId, entity, entityColor, flowData, onEnd }) {
+  const [nodeId, setNodeId] = useState('start');
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [nodeId]);
+
+  if (!flowData) return <LoadingScreen entityColor={entityColor}/>;
+
+  const node = flowData[nodeId] || flowData.start;
+  if (!node) return <LoadingScreen entityColor={entityColor}/>;
+
+  const advance = (nextId) => {
+    if (!nextId || nextId === 'end') { onEnd(); return; }
+    if (flowData[nextId]) setNodeId(nextId);
+    else onEnd();
+  };
+
+  return (
+    <div className="conv-screen" style={{'--ec': entityColor}}>
+      <FloatingParticles color={entityColor} count={8}/>
+      <header className="conv__header">
+        <button className="conv__back" onClick={onEnd}>← Quitter</button>
+        <EntityBadge entity={entity} entityId={entityId} entityColor={entityColor}/>
+        <div style={{width:60}}/>
+      </header>
+      <div className="conv__body">
+        <FreeNodeRenderer
+          node={node}
+          entity={entity}
+          entityId={entityId}
+          entityColor={entityColor}
+          onAdvance={advance}
+          onEnd={onEnd}
+        />
+        <div ref={bottomRef}/>
+      </div>
+    </div>
+  );
+}
+
+function FreeNodeRenderer({ node, entity, entityId, entityColor, onAdvance, onEnd }) {
   if (!node) return null;
   switch (node.type) {
     case 'message':
-      return <div className="node-message"><ChatBubble text={node.text} speaker="entity" entityColor={entityColor}/><button className="conversation__next-btn" style={{'--accent':entityColor}} onClick={onAdvance}>Je comprends →</button></div>;
-    case 'message+question':
-      return <div className="node-question"><ChatBubble text={node.text} speaker="entity" entityColor={entityColor}/><p className="node-question__label">{node.question}</p><div className="node-choices">{node.options.map((opt,i)=><ChoiceButton key={opt.id} label={opt.label} onClick={()=>onChoose(opt)} entityColor={entityColor} index={i}/>)}</div></div>;
+      return (
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={node.text}/>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onAdvance(node.next)}>
+            Je comprends →
+          </button>
+        </div>
+      );
     case 'question':
-      return <div className="node-question"><ChatBubble text={node.text} speaker="entity" entityColor={entityColor}/><div className="node-choices">{node.options.map((opt,i)=><ChoiceButton key={opt.id} label={opt.label} onClick={()=>onChoose(opt)} entityColor={entityColor} index={i}/>)}</div></div>;
-    case 'reframe':
-      return <div className="node-reframe"><div className="node-reframe__badge" style={{borderColor:entityColor}}><span>💬</span><p>{node.text}</p></div><button className="conversation__next-btn" style={{'--accent':entityColor}} onClick={onAdvance}>Oui, c'est ça →</button></div>;
+    case 'message+question':
+      return (
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={node.text||node.question}/>
+          <div className="conv-choices">
+            {(node.options||[]).map((opt,i) => (
+              <button key={i} className="conv-choice" style={{'--color':entityColor}} onClick={()=>onAdvance(opt.next||opt.id)}>
+                <span className="conv-choice__star" style={{color:entityColor}}>✦</span>
+                <span>{opt.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
     case 'minigame':
-      return <div className="node-minigame"><ChatBubble text={node.intro} speaker="entity" entityColor={entityColor}/><MiniGameRenderer game={node.game} entityColor={entityColor} entityId={entityId} onComplete={onAdvance}/></div>;
-    case 'formula':
-      return <div className="node-formula"><FormulaCard formula={formula} entityColor={entityColor} onNext={onAdvance}/></div>;
-    case 'moral':
-      return <div className="node-moral"><MoralCard entityId={entityId} entityColor={entityColor} onNext={onAdvance}/></div>;
+      return (
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={node.intro||node.text}/>
+          <MiniGameRenderer gameId={node.game} entityColor={entityColor} entityId={entityId} onComplete={()=>onAdvance(node.next)}/>
+        </div>
+      );
     case 'end':
-      return <div className="node-end"><div className="node-end__milo"><img src="/svg/milo.svg" alt="Milo" className="node-end__milo-img"/></div><ChatBubble text={node.text} speaker="entity" entityColor="#c4b8e8"/><button className="conversation__next-btn conversation__next-btn--end" style={{'--accent':entityColor}} onClick={onEnd}>Retourner dans la vraie vie ✦</button></div>;
+      return (
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={node.text}/>
+          <button className="conv__btn conv__btn--end" style={{'--accent':entityColor}} onClick={onEnd}>
+            Retourner dans la vraie vie ✦
+          </button>
+        </div>
+      );
     default:
-      return <div><p style={{color:'rgba(255,255,255,0.5)',textAlign:'center'}}>(node:{node.type})</p><button onClick={onAdvance}>Suivant</button></div>;
+      return (
+        <div className="conv-step">
+          <EntitySpeech entityId={entityId} entity={entity} entityColor={entityColor} text={node.text||'...'}/>
+          <button className="conv__btn" style={{'--accent':entityColor}} onClick={()=>onAdvance(node.next)}>
+            Continuer →
+          </button>
+        </div>
+      );
   }
 }
