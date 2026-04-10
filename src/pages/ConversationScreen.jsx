@@ -110,12 +110,12 @@ export default function ConversationScreen({ entityId, routeId, isPremium, onEnd
   const getStep = (id) => route?.steps?.find(s => s.id === id);
 
   const goNext = (nextId) => {
-    if (!nextId) {
-      // Fin du parcours
-      recordProgress(entityId);
-      onEnd();
-      return;
-    }
+  if (!nextId) {
+    recordProgress(entityId);
+    onEnd();
+    return;
+  }
+
     if (nextId === 'formula') {
       setShowFormula(true);
       return;
