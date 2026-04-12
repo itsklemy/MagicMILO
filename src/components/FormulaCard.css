@@ -1,6 +1,6 @@
 .formula-card {
   background: rgba(45, 38, 96, 0.7);
-  border: 1px solid color-mix(in srgb, var(--entity-color) 40%, transparent);
+  border: 1px solid rgba(155,142,196,.40);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
   display: flex;
@@ -12,7 +12,7 @@
   width: 100%;
   backdrop-filter: blur(12px);
   animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px color-mix(in srgb, var(--entity-color) 15%, transparent);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(155,142,196,.15);
 }
 
 .formula-card__header {
@@ -49,9 +49,9 @@
 }
 
 .formula-card__formula--revealed {
-  background: color-mix(in srgb, var(--entity-color) 10%, transparent);
-  border-color: color-mix(in srgb, var(--entity-color) 40%, transparent);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--entity-color) 20%, transparent);
+  background: rgba(155,142,196,.10);
+  border-color: rgba(155,142,196,.40);
+  box-shadow: 0 0 24px rgba(155,142,196,.20);
 }
 
 .formula-card__text {
@@ -99,7 +99,7 @@
 
 .formula-card__btn:hover {
   transform: scale(1.04);
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--entity-color) 50%, transparent);
+  box-shadow: 0 8px 24px rgba(155,142,196,.50);
 }
 
 .formula-card__btn:active {

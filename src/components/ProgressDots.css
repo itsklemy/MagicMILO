@@ -15,10 +15,10 @@
 .progress-dot--active {
   background: var(--dot-color);
   transform: scale(1.4);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--dot-color) 60%, transparent);
+  box-shadow: 0 0 8px rgba(155,142,196,.60);
 }
 
 .progress-dot--done {
-  background: color-mix(in srgb, var(--dot-color) 50%, transparent);
+  background: rgba(155,142,196,.50);
   transform: scale(1);
 }

@@ -23,10 +23,10 @@
 }
 
 .choice-btn:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  background: rgba(155,142,196,.15);
   border-color: var(--accent);
   transform: translateX(4px);
-  box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 25%, transparent);
+  box-shadow: 0 4px 20px rgba(155,142,196,.25);
 }
 
 .choice-btn:active:not(:disabled) {

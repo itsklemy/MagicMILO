@@ -23,7 +23,7 @@
 
 .chat-bubble--entity .chat-bubble__text {
   background: rgba(45, 38, 96, 0.75);
-  border: 1px solid color-mix(in srgb, var(--bubble-color, #9b8ec4) 30%, transparent);
+  border: 1px solid rgba(155,142,196,.30);
   border-bottom-left-radius: var(--radius-sm);
   color: var(--color-lavender-pale);
   backdrop-filter: blur(6px);
