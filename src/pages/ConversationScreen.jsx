@@ -33,12 +33,18 @@ import './ConversationScreen.css';
 
 const ALL_ENTITIES = { ...entitiesData, ...lunaData, ...amoraData, ...philoData };
 
+import brumoFlow from '../data/flows/brumo.json';
+import ignisFlow from '../data/flows/ignis.json';
+import plumaFlow from '../data/flows/pluma.json';
+import noxFlow   from '../data/flows/nox.json';
+import soliFlow  from '../data/flows/soli.json';
+
 const flowModules = {
-  brumo: () => import('../data/flows/brumo.json'),
-  ignis: () => import('../data/flows/ignis.json'),
-  pluma: () => import('../data/flows/pluma.json'),
-  nox:   () => import('../data/flows/nox.json'),
-  soli:  () => import('../data/flows/soli.json'),
+  brumo: brumoFlow,
+  ignis: ignisFlow,
+  pluma: plumaFlow,
+  nox:   noxFlow,
+  soli:  soliFlow,
 };
 
 // ── Renderer mini-jeux ────────────────────────────────────────
@@ -90,9 +96,9 @@ export default function ConversationScreen({ entityId, routeId, isPremium, onEnd
   // ── Charge flow gratuit ───────────────────────────────────
   useEffect(() => {
     if (isPremiumFlow) { setLoading(false); return; }
-    const loader = flowModules[entityId];
-    if (loader) loader().then(mod => { setFreeFlow(mod.default || mod); setLoading(false); });
-    else setLoading(false);
+    const flow = flowModules[entityId];
+if (flow) { setFreeFlow(flow); setLoading(false); }
+else setLoading(false);
   }, [entityId, isPremiumFlow]);
 
   // ── Init parcours premium ─────────────────────────────────
@@ -396,14 +402,20 @@ function FreeConversation({ entityId, entity, entityColor, flowData, onEnd }) {
   }, [nodeId]);
 
   if (!flowData) return <LoadingScreen entityColor={entityColor}/>;
+  console.log('flowData:', flowData);
+console.log('nodeId:', nodeId);
+console.log('nodes:', flowData?.nodes);
+console.log('node:', flowData?.nodes?.[nodeId]);
 
-  const node = flowData[nodeId] || flowData.start;
-  if (!node) return <LoadingScreen entityColor={entityColor}/>;
+const nodes = flowData.nodes || flowData;
+const node = nodes[nodeId] || nodes.start;
+if (!node) return <LoadingScreen entityColor={entityColor}/>;
 
   const advance = (nextId) => {
     if (!nextId || nextId === 'end') { onEnd(); return; }
-    if (flowData[nextId]) setNodeId(nextId);
-    else onEnd();
+   const nodes = flowData.nodes || flowData;
+if (nodes[nextId]) setNodeId(nextId);
+else onEnd();
   };
 
   return (
