@@ -26,7 +26,7 @@
   transform: translateY(-6px) scale(1.02);
   border-color: var(--entity-color);
   box-shadow: 0 16px 48px rgba(0,0,0,.2),
-              0 0 32px color-mix(in srgb, var(--entity-color) 30%, transparent);
+              0 0 32px rgba(155,142,196,.30);
   outline: none;
 }
 
@@ -39,7 +39,7 @@
   inset: 0;
   background: radial-gradient(
     ellipse at 50% 30%,
-    color-mix(in srgb, var(--entity-color) 15%, transparent) 0%,
+    rgba(155,142,196,.15) 0%,
     transparent 70%
   );
   pointer-events: none;
