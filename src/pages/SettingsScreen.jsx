@@ -13,7 +13,7 @@ export default function SettingsScreen({ isPremium, user, onLogout, onClose, onR
     } else if (isAndroid) {
       window.location.href = 'https://play.google.com/store/account/subscriptions';
     } else {
-      window.open('https://billing.stripe.com/p/login/bpc_1TKQxQLiiTKdYng90OhLqayg', '_blank');
+      window.open('https://billing.stripe.com/p/login/bJe4gA4Ps0431AJf0b3wQ00', '_blank');
     }
   };
 
