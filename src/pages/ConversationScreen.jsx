@@ -396,14 +396,20 @@ function FreeConversation({ entityId, entity, entityColor, flowData, onEnd }) {
   }, [nodeId]);
 
   if (!flowData) return <LoadingScreen entityColor={entityColor}/>;
+  console.log('flowData:', flowData);
+console.log('nodeId:', nodeId);
+console.log('nodes:', flowData?.nodes);
+console.log('node:', flowData?.nodes?.[nodeId]);
 
-  const node = flowData[nodeId] || flowData.start;
-  if (!node) return <LoadingScreen entityColor={entityColor}/>;
+const nodes = flowData.nodes || flowData;
+const node = nodes[nodeId] || nodes.start;
+if (!node) return <LoadingScreen entityColor={entityColor}/>;
 
   const advance = (nextId) => {
     if (!nextId || nextId === 'end') { onEnd(); return; }
-    if (flowData[nextId]) setNodeId(nextId);
-    else onEnd();
+   const nodes = flowData.nodes || flowData;
+if (nodes[nextId]) setNodeId(nextId);
+else onEnd();
   };
 
   return (
